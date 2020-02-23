@@ -1,0 +1,13 @@
+.wrapper{
+	position: relative;
+	overflow-x: hidden;
+	min-height: 100vh;
+	width: 100%;
+}
+.trigger{
+	font-size: 18px;
+	line-height: 64px;
+	padding: 0 24px;
+	cursor: pointer;
+	transition: color 0.3s;
+}

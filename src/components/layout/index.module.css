@@ -1,0 +1,11 @@
+.container{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-height: 100%;
+}
+.section{
+	composes: container;
+	min-height: 100%;
+	flex-direction: row;
+}
