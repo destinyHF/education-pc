@@ -16,11 +16,6 @@ const configs = [{
 
 	}],
 },{
-	label:"测试",
-	icon:"audit",
-	path:"/test",
-
-},{
 	label:"素材库",
 	key:"material",
 	icon:"folder",

@@ -1,11 +1,12 @@
 import React from "react";
-import {Icon, Layout,Menu} from "antd";
+import {Icon,Layout,Menu} from "antd";
+import {withRouter} from "react-router-dom";
 import style from "./aside.module.css";
 import configs from "../../routes/config";
 
-export default class extends React.Component{
+export default withRouter(class extends React.Component{
 	render(){
-		const {collapsed} = this.props;
+		const {collapsed,location} = this.props;
 		return(
 			<Layout.Sider trigger={null} collapsible collapsed={collapsed} width={256}>
 				<div className={style.title} onClick={()=>this.pathTo(configs.defaultRoute)}>
@@ -16,7 +17,7 @@ export default class extends React.Component{
 					}
 				</div>
 				<div>
-					<Menu theme="dark" mode="inline" defaultSelectedKeys={[this.getHash()]} defaultOpenKeys={["newsList"]}>
+					<Menu theme="dark" mode="inline" selectedKeys={[location.pathname]} defaultOpenKeys={["newsList"]}>
 						{
 							this.loopMenu()
 						}
@@ -56,9 +57,6 @@ export default class extends React.Component{
 		});
 	};
 	pathTo=(path)=>{
-		window.location.href="#"+path;
+		this.props.history.push(path);
 	};
-	getHash=()=>{
-		return window.location.hash.substring(1).split("?")[0];
-	}
-}
+})
