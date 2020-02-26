@@ -1,4 +1,4 @@
-import NewsList from "./pagse/news-list";
+import Published from "./pagse/published";
 
 const defaultRoute = "/published";
 
@@ -9,7 +9,7 @@ const configs = [{
 	children:[{
 		label:"已发布",
 		path:"/published",
-
+		component:Published
 	},{
 		label:"草稿箱",
 		path:"/drafts",
