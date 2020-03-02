@@ -1,12 +1,11 @@
 import React from "react";
-import {Table,Row,Alert} from "antd";
+import {Table,Row,Alert,Button} from "antd";
 import rndm from "rndm";
 const {Column} = Table;
 
 export default class extends React.Component{
 	constructor(props){
 		super(props);
-		console.log(props);
 		this.state = {
 			columnKeys:props.tableColumn.map(item=>item.key),
 			tableWidth:0
@@ -28,7 +27,7 @@ export default class extends React.Component{
 									{`已选择`}
 									<span className={"text-primary"}>&nbsp;{`${rowSelection.selectedRowKeys.length}`}&nbsp;</span>
 									{`项`}
-									<a onClick={this.resetSelected} style={{marginLeft:"15px"}} href={void(0)} className={"text-primary"}>清空</a>
+									<Button onClick={this.resetSelected} type={"link"}>清空</Button>
 								</div>
 							}
 						/>
@@ -49,7 +48,7 @@ export default class extends React.Component{
 							<Column
 								title={item.title}
 								key={item.key}
-								width={isScroll?item.width:undefined}
+								width={item.width}
 								fixed={isScroll?item.fixed:undefined}
 								render={(text,record)=>{
 									const Content = item.component;
@@ -74,6 +73,7 @@ export default class extends React.Component{
 			columns:[],
 			maxWidth:0
 		});
+		console.log(maxWidth,tableWidth);
 		return{
 			columns,
 			isScroll:maxWidth>tableWidth
@@ -87,8 +87,8 @@ export default class extends React.Component{
 		this.props.callback({currentPage:1,...params},true);
 	};
 	rowSelect=(selectedRowKeys,selectedRows)=>{
-		const {selectCallback} = this.props;
-		selectCallback({selectedRowKeys,selectedRows});
+		const {selectedCallback} = this.props;
+		selectedCallback({selectedRowKeys,selectedRows});
 	};
 	resetSelected=()=>{
 		const {selectedCallback} = this.props;

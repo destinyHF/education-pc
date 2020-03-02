@@ -18,7 +18,7 @@ export default class extends React.Component{
 		)
 	}
 	buildRenderData=()=>{ //最多二级菜单
-		return configs.reduce((init,item)=>{
+		return [...configs,...configs.otherConfigs].reduce((init,item)=>{
 			if(Array.isArray(item.children)){
 				item.children.forEach(item=>{
 					init.push(item);

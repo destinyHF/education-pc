@@ -1,5 +1,7 @@
 import React from "react";
+import {Button,Tooltip,Icon} from "antd";
 import ETable from "../../../components/e-table";
+import {getPublishedArticle} from "../../../data/request";
 
 const conditions = [{
 	label:"标题",type:"input",key:"title"
@@ -17,12 +19,26 @@ export default class extends React.Component{
 				conditions={conditions}
 				handleBtn={handleBtn}
 				handleCallback={this.handleCallback}
+				scrollX={1050}
 				tableColumn={[
-					{title:"标题",width:"200px",key:"title"},
-					{title:"摘要",width:"200px",key:"desc"},
-					{title:"创建时间",width:"200px",key:"createTime"}
+					{title:"标题",width:"250px",key:"title",component:({data})=><span className={"a-link"}>{data.title+data.title}</span>},
+					{title:"类型",width:"100px",key:"articleType"},
+					{title:"来源",width:"100px",key:"source"},
+					{title:"编辑",width:"100px",key:"editor"},
+					{title:"发布时间",width:"150px",key:"publishedTime"},
+					{title:"更新时间",width:"150px",key:"updateTime"},
+					{title:"操作",width:"100px",key:"handle",component:({data,getList})=>
+						<div>
+							<Tooltip title={"编辑"}>
+								<Icon type={"edit"} className={"table-icon"}/>
+							</Tooltip>
+							<Tooltip title={"删除"}>
+								<Icon type={"delete"} className={"table-icon"}/>
+							</Tooltip>
+						</div>
+					}
 				]}
-				dataSource={[]}
+				dataSource={getPublishedArticle}
 			/>
 		)
 	}
@@ -39,7 +55,7 @@ export default class extends React.Component{
 		}
 	};
 	createArticle=()=>{
-		console.log("创建");
+		this.props.history.push("articleForm");
 	};
 	editArticle=([target],callback)=>{
 		console.log("编辑",target,callback);
