@@ -73,7 +73,6 @@ export default class extends React.Component{
 			columns:[],
 			maxWidth:0
 		});
-		console.log(maxWidth,tableWidth);
 		return{
 			columns,
 			isScroll:maxWidth>tableWidth

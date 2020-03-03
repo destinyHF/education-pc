@@ -10,22 +10,35 @@ const API = {
 		createArticle:"/createArticle",//创建文章
 		updateArticle:"/updateArticle",//编辑文章
 		getPublishedArticle:"/getPublishedArticle",//获取已发布文章
+		getImgMaterial:"/getImgMaterial",//获取图片库列表
+		uploadFile:"/uploadFile",//上传文件
 	}
 };
 
+axios.defaults.baseURL = "";
+axios.defaults.headers.post["Content-Type"] = 'application/json';
 const $http = function({
 	url="",
 	method="post",
 	data={},
+	headers={},
 	responseType="json",
-	testData
+	testData,
 }){
 	const close = createSpin();
+	if(headers["Content-Type"] === "multipart/form-data"){
+		const formData = new FormData();
+		Object.entries(data).forEach(item=>{
+			formData.append(item[0],item[1]);
+		});
+		data = formData;
+	}
 	return new Promise((resolve, reject)=>{
 		axios({
 			url,
 			method,
 			data,
+			headers,
 			responseType
 		}).then(response=>{
 			resolve(response);

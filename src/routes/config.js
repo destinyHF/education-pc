@@ -1,5 +1,6 @@
-import Published from "./pagse/published";
-import ArticleForm from "./pagse/article-form";
+import Published from "./pages/published";
+import ArticleForm from "./pages/article-form";
+import ImgMaterial from "./pages/img-material";
 /*
 * 默认路由
 * */
@@ -30,6 +31,7 @@ const configs = [{
 	children:[{
 		label:"图片",
 		path:"/imgMaterial",
+		component:ImgMaterial
 	},{
 		label:"视频",
 		path:"/videoMaterial",

@@ -11,7 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
+/*antd样式*/
 .mask-wrapper{
   position: absolute;
   top: 0;
@@ -22,6 +22,9 @@ code {
 }
 .mask-wrapper>.ant-spin{
   margin-top: 20vh;
+}
+.ant-modal-confirm-content{
+  margin-left: 0 !important;
 }
 /*富文本编辑器样式重置*/
 .edui-box,.edui-editor-toolbarbox{
