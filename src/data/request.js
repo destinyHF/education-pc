@@ -81,27 +81,8 @@ export function getPublishedArticle(data={}){
 /*获取图片素材列表*/
 export function getImgMaterial(data={}){
 	return $http({
-		url:API.common.getImgMaterial,
-		data,
-		testData:{
-			code:"success",
-			data:{
-				list:[{
-					id:222,
-					src:`http://img0.imgtn.bdimg.com/it/u=3386247472,87720242&fm=26&gp=0.jpg`,
-					desc:`这是测试内容这是测试内容这是测试内容这是测试内容这是测试标题`,
-					editor:"黄小茜",
-					createTime:"2020-03-02 10:22:31",
-					updateTime:"2020-03-02 10:22:31"
-				}],
-				page:{
-					totalSize:1,
-					totalPage:1,
-					currentPage:1,
-					pageSize:10
-				}
-			}
-		}
+		url:API.common.getImageMaterial,
+		data
 	})
 }
 /*上传文件*/
@@ -112,11 +93,6 @@ export function uploadFile(data={}) {
 			"Content-Type":"multipart/form-data"
 		},
 		data,
-		testData:{
-			code:"success",
-			data:{
-				src:`http://img0.imgtn.bdimg.com/it/u=3386247472,87720242&fm=26&gp=0.jpg`
-			}
-		}
+
 	})
 }

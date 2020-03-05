@@ -112,7 +112,10 @@ class UploadFile extends React.Component{
 				fileSrc:data.src
 			}));
 		}).catch(error=>{
+			console.log(typeof error);return;
 			message.error(error,2.5);
+		}).then(()=>{
+			document.getElementById(this.inputId).value = "";
 		});
 	};
 	parseValue=()=>{

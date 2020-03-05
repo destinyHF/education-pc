@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
 import {Spin} from "antd";
+import {instanceOf} from "prop-types";
 
 const API = {
 	common:{
@@ -10,12 +11,12 @@ const API = {
 		createArticle:"/createArticle",//创建文章
 		updateArticle:"/updateArticle",//编辑文章
 		getPublishedArticle:"/getPublishedArticle",//获取已发布文章
-		getImgMaterial:"/getImgMaterial",//获取图片库列表
+		getImageMaterial:"/getImageMaterial",//获取图片库列表
 		uploadFile:"/uploadFile",//上传文件
 	}
 };
 
-axios.defaults.baseURL = "";
+axios.defaults.baseURL = "/edu-pc";
 axios.defaults.headers.post["Content-Type"] = 'application/json';
 const $http = function({
 	url="",
@@ -41,12 +42,12 @@ const $http = function({
 			headers,
 			responseType
 		}).then(response=>{
-			resolve(response);
-		}).catch(error=>{
+			resolve(response.data);
+		}).catch((...error)=>{
 			if(testData){
 				resolve(testData);
 			}else{
-				reject(error);
+				reject("error");
 			}
 		}).then(()=>{
 			close();

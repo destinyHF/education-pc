@@ -1,15 +1,14 @@
 const http = require("http");
-const server = http.createServer(function(req,res){
-
-	if(req.url === "/getPublishedNews"){
-		res.setHeader("Content-Type","application/json");
-		res.writeHead(200);
-		res.end(JSON.stringify({
-			code:"success",
-			data:[]
-		}));
-	}else{
+http.createServer((req,res)=>{
+	res.writeHead(200,{"Content-Type":"text/plain"});
+	const buffers = [];
+	req.on("data",(chunk)=>{
+		console.log("getData",chunk.toString());
+		buffers.push(chunk);
+	});
+	req.on("end",()=>{
+		const buffer = Buffer.concat(buffers);
+		console.log(buffer.toString().length);
 		res.end("hello world");
-	}
-});
-server.listen(9000);
+	});
+}).listen(8081);
