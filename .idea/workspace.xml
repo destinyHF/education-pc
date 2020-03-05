@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d0123ae-3655-4142-8bde-9655d9806e02" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-proxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/config-proxy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/pages/img-material/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/img-material/form.js" afterDir="false" />
-    </list>
+    <list default="true" id="6d0123ae-3655-4142-8bde-9655d9806e02" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -249,7 +241,7 @@
       <workItem from="1582014230900" duration="6290000" />
       <workItem from="1582426838211" duration="12397000" />
       <workItem from="1582522649205" duration="27819000" />
-      <workItem from="1583112220825" duration="56942000" />
+      <workItem from="1583112220825" duration="57272000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1582439090099</created>
@@ -307,11 +299,18 @@
       <option name="project" value="LOCAL" />
       <updated>1583226780184</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="commit">
+      <created>1583398502424</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1583398502424</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103448000" />
+    <option name="totallyTimeSpent" value="103778000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
