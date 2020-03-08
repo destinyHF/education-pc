@@ -1,11 +1,11 @@
 
-const proxyIP = "http://127.0.0.1";
-
+const proxyIP = "http://yapi.demo.qunar.com/mock/85180";
 const addProxy = params => config => {
 	config.proxy = {
-		"/":{
-			target:proxyIP
-		}
+		"/edu-pc":{
+			target:proxyIP,
+			changeOrigin:true
+		},
 	};
 	return config;
 };

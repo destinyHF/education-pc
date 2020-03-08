@@ -1,26 +1,24 @@
 import React from "react";
-import {HashRouter as Router,Route,Redirect,Switch} from "react-router-dom";
+import {Route,Redirect,Switch} from "react-router-dom";
 import configs from "./config";
 
 export default class extends React.Component{
 	render() {
 		return (
 			<div>
-				<Router>
-					<Switch>
-						{
-							this.buildRenderData().map(item=>
-								<Route key={item.path} path={item.path} exact={true} component={item.component || (()=>item.path)} />
-							)
-						}
-						<Redirect exact={true} to={configs.defaultRoute}/>
-					</Switch>
-				</Router>
+				<Switch>
+					{
+						this.buildRenderData().map(item=>
+							<Route key={item.path} path={item.path} exact={true} component={item.component || (()=>item.path)} />
+						)
+					}
+					<Redirect exact={true} to={configs.defaultRoute}/>
+				</Switch>
 			</div>
 		)
 	}
 	buildRenderData=()=>{ //最多二级菜单
-		return configs.reduce((init,item)=>{
+		return [...configs,...configs.otherConfigs].reduce((init,item)=>{
 			if(Array.isArray(item.children)){
 				item.children.forEach(item=>{
 					init.push(item);

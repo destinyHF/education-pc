@@ -11,7 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
+/*antd样式*/
 .mask-wrapper{
   position: absolute;
   top: 0;
@@ -22,4 +22,41 @@ code {
 }
 .mask-wrapper>.ant-spin{
   margin-top: 20vh;
+}
+.ant-modal-confirm-content{
+  margin-left: 0 !important;
+}
+/*富文本编辑器样式重置*/
+.edui-box,.edui-editor-toolbarbox{
+  line-height: initial;
+}
+.edui-default .edui-toolbar .edui-combox-body .edui-button-body{
+  width: auto !important;
+}
+.edui-default .edui-toolbar .edui-combox-body .edui-arrow{
+  width: 12px !important;
+}
+/*通用文本样式*/
+.text-primary{
+  color: #1890ff;
+  transition: color 0.3s;
+}
+.a-link{
+  cursor: pointer;
+  color: #1890ff;
+  transition: color 0.3s;
+}
+.a-link:hover{
+  color: #40a9ff;
+}
+
+.table-icon{
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  padding: 3px;
+  cursor: pointer;
+}
+.table-icon:hover{
+  background-color: rgba(0,0,0,.1);
 }
