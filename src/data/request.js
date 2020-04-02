@@ -54,34 +54,6 @@ export function updateArticle(data={}){
 export function getPublishedArticle(data={}){
 	return $http({
 		url:API.common.getPublishedArticle,
-		data,
-		testData:{
-			code:"success",
-			data:{
-				list:[{
-					id:222,
-					title:`这是测试标题这是测试标题这是测试标题这是测试标题这是测试标题`,
-					content:`这是测试内容这是测试内容这是测试内容这是测试内容这是测试标题`,
-					articleType:`normal`,
-					source:"封面新闻",
-					editor:"黄小茜",
-					publishedTime:"2020-03-02 10:22:31",
-					updateTime:"2020-03-02 10:22:31"
-				}],
-				page:{
-					totalSize:1,
-					totalPage:1,
-					currentPage:1,
-					pageSize:10
-				}
-			}
-		}
-	})
-}
-/*获取图片素材列表*/
-export function getImgMaterial(data={}){
-	return $http({
-		url:API.common.getImageMaterial,
 		data
 	})
 }
@@ -89,10 +61,68 @@ export function getImgMaterial(data={}){
 export function uploadFile(data={}) {
 	return $http({
 		url:API.common.uploadFile,
+		timeout:60*60*1000,
 		headers:{
 			"Content-Type":"multipart/form-data"
 		},
 		data,
+	})
+}
 
+/*获取图片素材列表*/
+export function getImgMaterial(data={}){
+	return $http({
+		url:API.common.getImageMaterial,
+		data
+	})
+}
+/*新建图片素材*/
+export function createImageMaterial(data={}) {
+	return $http({
+		url:API.common.createImageMaterial,
+		data,
+	})
+}
+/*删除图片素材*/
+export function deleteImageMaterial(data={}) {
+	return $http({
+		url:API.common.deleteImageMaterial,
+		data,
+	})
+}
+/*编辑图片素材*/
+export function updateImageMaterial(data={}) {
+	return $http({
+		url:API.common.updateImageMaterial,
+		data,
+	})
+}
+
+/*获取视频素材列表*/
+export function getVideoMaterial(data={}){
+	return $http({
+		url:API.common.getVideoMaterial,
+		data
+	})
+}
+/*新建视频素材*/
+export function createVideoMaterial(data={}) {
+	return $http({
+		url:API.common.createVideoMaterial,
+		data,
+	})
+}
+/*删除视频素材*/
+export function deleteVideoMaterial(data={}) {
+	return $http({
+		url:API.common.deleteVideoMaterial,
+		data,
+	})
+}
+/*编辑视频素材*/
+export function updateVideoMaterial(data={}) {
+	return $http({
+		url:API.common.updateVideoMaterial,
+		data,
 	})
 }

@@ -21,7 +21,7 @@ export default class extends React.Component{
 				handleCallback={this.handleCallback}
 				scrollX={1050}
 				tableColumn={[
-					{title:"标题",width:"250px",key:"title",component:({data})=><span className={"a-link"}>{data.title+data.title}</span>},
+					{title:"标题",width:"250px",key:"title",component:({data})=><span className={"a-link"}>{data.title}</span>},
 					{title:"类型",width:"100px",key:"articleType"},
 					{title:"来源",width:"100px",key:"source"},
 					{title:"编辑",width:"100px",key:"editor"},

@@ -11,3 +11,7 @@
 	cursor: pointer;
 	transition: color 0.3s;
 }
+.content{
+	max-height: calc(100vh - 112px);
+	overflow: auto;
+}

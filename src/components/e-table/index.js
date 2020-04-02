@@ -79,7 +79,8 @@ class ETable extends React.Component{
 							},
 							showSizeChanger:true,
 							pageSizeOptions:["10","20","50","100","200","500"],
-							onShowSizeChange:(current,pageSize)=>this.getResourceData({currentPage,pageSize},false),
+							onChange:(currentPage,pageSize)=>this.getResourceData({currentPage,pageSize},false),
+							onShowSizeChange:(current,pageSize)=>this.getResourceData({currentPage,pageSize},true),
 							size:"default"
 						}}
 						tableColumn={tableColumn}
@@ -158,8 +159,8 @@ class ETable extends React.Component{
 		};
 		if(dynamic){
 			if(isRequest){
-				this.props.dataSource(reqData).then(response=>{
-					const {data} = response;
+				this.props.dataSource(reqData).then((response={})=>{
+					const {data={}} = response;
 					if(data instanceof Array){
 						originDataSource = data;
 						dataSource = originDataSource.slice(0,pageSize);

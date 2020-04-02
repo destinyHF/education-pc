@@ -2,7 +2,6 @@ import axios from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
 import {Spin} from "antd";
-import {instanceOf} from "prop-types";
 
 const API = {
 	common:{
@@ -11,8 +10,17 @@ const API = {
 		createArticle:"/createArticle",//创建文章
 		updateArticle:"/updateArticle",//编辑文章
 		getPublishedArticle:"/getPublishedArticle",//获取已发布文章
-		getImageMaterial:"/getImageMaterial",//获取图片库列表
 		uploadFile:"/uploadFile",//上传文件
+
+		getImageMaterial:"/getImageMaterial",//获取图片库列表
+		createImageMaterial:"/createImageMaterial",//新建图片素材
+		deleteImageMaterial:"/deleteImageMaterial",//删除图片素材
+		updateImageMaterial:"/updateImageMaterial",//更新图片素材
+
+		getVideoMaterial:"/getVideoMaterial",//获取视频库列表
+		createVideoMaterial:"/createVideoMaterial",//新建视频素材
+		deleteVideoMaterial:"/deleteVideoMaterial",//删除视频素材
+		updateVideoMaterial:"/updateVideoMaterial",//更新视频素材
 	}
 };
 
@@ -24,9 +32,9 @@ const $http = function({
 	data={},
 	headers={},
 	responseType="json",
+	timeout=10000,
 	testData,
 }){
-	const close = createSpin();
 	if(headers["Content-Type"] === "multipart/form-data"){
 		const formData = new FormData();
 		Object.entries(data).forEach(item=>{
@@ -35,19 +43,25 @@ const $http = function({
 		data = formData;
 	}
 	return new Promise((resolve, reject)=>{
+		const close = createSpin();
 		axios({
 			url,
 			method,
 			data,
+			timeout,
 			headers,
 			responseType
 		}).then(response=>{
-			resolve(response.data);
-		}).catch((...error)=>{
+			if(response.data.code === "success"){
+				resolve(response.data);
+			}else{
+				reject("error");
+			}
+		}).catch((error)=>{
 			if(testData){
 				resolve(testData);
 			}else{
-				reject("error");
+				reject(error.message);
 			}
 		}).then(()=>{
 			close();

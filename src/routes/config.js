@@ -1,6 +1,7 @@
 import Published from "./pages/published";
 import ArticleForm from "./pages/article-form";
 import ImgMaterial from "./pages/img-material";
+import VideoMaterial from "./pages/video-material";
 /*
 * 默认路由
 * */
@@ -35,6 +36,7 @@ const configs = [{
 	},{
 		label:"视频",
 		path:"/videoMaterial",
+		component:VideoMaterial
 	}],
 }];
 const otherConfigs = [];

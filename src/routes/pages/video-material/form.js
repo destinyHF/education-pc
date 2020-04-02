@@ -1,7 +1,6 @@
 import React from "react";
 import {Form,Button,Icon,Row,Col,message,Input} from "antd";
 import {uploadFile} from "../../../data/request";
-import Thumbnail from "../../../components/thumbnail";
 import rndm from "rndm";
 
 const layout = {
@@ -17,12 +16,12 @@ export default Form.create()(class extends React.Component{
 			<Form {...layout}>
 				{
 					type !== "edit" &&
-					<Form.Item label={"图片"}>
+					<Form.Item label={"视频"}>
 						{
 							getFieldDecorator("src",{
 								initialValue:data.src || "",
 								rules:[
-									{required:true,message:"请上传图片！"}
+									{required:true,message:"请上传视频！"}
 								]
 							})(
 								<UploadFile/>
@@ -52,7 +51,7 @@ export default Form.create()(class extends React.Component{
 
 class UploadFile extends React.Component{
 	static defaultProps={
-		type:"image"
+		type:"video"
 	};
 	constructor(props){
 		super(props);
@@ -68,6 +67,7 @@ class UploadFile extends React.Component{
 			<div>
 				<div>
 					<Button type={"primary"} onClick={this.triggerClick}><Icon type={"upload"}/>上传</Button>
+					（视频文件上传耗时比较长，请耐心等待~）
 					<input style={{display:"none"}} type={"file"} id={this.inputId} accept={this.getAccept()} onChange={this.chooseFile}/>
 				</div>
 				<div>
@@ -89,9 +89,7 @@ class UploadFile extends React.Component{
 								</Col>
 							</Row>
 							<Row>
-								<Col span={8}>
-									<Thumbnail src={fileSrc}/>
-								</Col>
+								<span className={"a-link"} onClick={()=>window.open(fileSrc)}>{fileSrc}</span>
 							</Row>
 						</>
 					}

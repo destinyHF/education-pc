@@ -16,6 +16,7 @@ export default class extends React.Component{
 					/>
 				</Layout.Header>
 				<Layout.Content
+					className={style.content}
 					style={{
 						margin: '24px 16px',
 						background: '#fff',

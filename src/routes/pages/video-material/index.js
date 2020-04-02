@@ -1,8 +1,7 @@
 import React from "react";
 import {Tooltip,Icon,Modal,message} from "antd";
 import ETable from "../../../components/e-table";
-import Thumbnail from "../../../components/thumbnail";
-import {getImgMaterial,createImageMaterial,deleteImageMaterial,updateImageMaterial} from "../../../data/request";
+import {getVideoMaterial,createVideoMaterial,deleteVideoMaterial,updateVideoMaterial} from "../../../data/request";
 import MaterialForm from "./form";
 
 const conditions = [
@@ -24,7 +23,7 @@ export default class extends React.Component{
 				handleCallback={this.handleCallback}
 				scrollX={800}
 				tableColumn={[
-					{title:"图片",width:"150px",key:"src",component:({data})=><Thumbnail src={data.src}/>},
+					{title:"链接",width:"150px",key:"src",component:({data})=><span onClick={()=>window.open(data.src)} className={"a-link"}>{data.src}</span>},
 					{title:"描述",width:"200px",key:"desc"},
 					{title:"容量",width:"100px",key:"fileSize",component:({data})=><span>{Number.isInteger(data.fileSize)?`${(data.fileSize/1024/1024).toFixed(2)}MB`:""}</span>},
 					{title:"编辑",width:"100px",key:"editor"},
@@ -40,7 +39,7 @@ export default class extends React.Component{
 						</div>
 					}
 				]}
-				dataSource={getImgMaterial}
+				dataSource={getVideoMaterial}
 			/>
 		)
 	}
@@ -71,7 +70,7 @@ export default class extends React.Component{
 						...JSON.parse(values.src)
 					};
 					delete reqData.src;
-					createImageMaterial(reqData).then(()=>{
+					createVideoMaterial(reqData).then(()=>{
 						message.success("操作成功！",1.5,()=>{
 							close();
 						});
@@ -99,7 +98,7 @@ export default class extends React.Component{
 						id:data.id,
 						...values
 					};
-					updateImageMaterial(reqData).then(()=>{
+					updateVideoMaterial(reqData).then(()=>{
 						message.success("操作成功！",1.5,()=>{
 							close();
 						});
@@ -115,11 +114,11 @@ export default class extends React.Component{
 		Modal.confirm({
 			title:"警告",
 			icon:"warning",
-			content:"删除将不可恢复，已使用的文章将不会加载该图片，确认执行操作？",
+			content:"删除将不可恢复，已使用的文章将不会加载该视频，确认执行操作？",
 			okText:"删除",
 			okType:"danger",
 			onOk:(close)=>{
-				deleteImageMaterial({
+				deleteVideoMaterial({
 					ids:selectedRows.map(item=>item.id)
 				}).then(()=>{
 					message.success("操作成功！",1.5,()=>{
