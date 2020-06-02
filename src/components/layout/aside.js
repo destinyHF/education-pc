@@ -1,5 +1,6 @@
 import React from "react";
-import {Icon,Layout,Menu} from "antd";
+import {Layout,Menu} from "antd";
+import {HomeOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
 import style from "./aside.module.css";
 import configs from "../../routes/config";
@@ -10,7 +11,7 @@ export default withRouter(class extends React.Component{
 		return(
 			<Layout.Sider trigger={null} collapsible collapsed={collapsed} width={256}>
 				<div className={style.title} onClick={()=>this.pathTo(configs.defaultRoute)}>
-					<Icon type={"home"} theme="twoTone" className={style.logo}/>
+					<HomeOutlined theme="twoTone" className={style.logo}/>
 					{
 						!collapsed &&
 						<div className={style.name}>CMS内容管理系统</div>
@@ -34,7 +35,7 @@ export default withRouter(class extends React.Component{
 						key={item.key}
 						title={
 							<span>
-								<Icon type={item.icon}/>
+								{/*<Icon type={item.icon}/>*/}
 								<span>{item.label}</span>
 							</span>
 						}
@@ -49,7 +50,7 @@ export default withRouter(class extends React.Component{
 			}else{
 				return(
 					<Menu.Item onClick={()=>this.pathTo(item.path)} key={item.path}>
-						<Icon type={item.icon}/>
+						{/*<Icon type={item.icon}/>*/}
 						<span>{item.label}</span>
 					</Menu.Item>
 				)

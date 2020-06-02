@@ -1,5 +1,6 @@
 import React from "react";
-import {Row,Icon,Tag} from "antd";
+import {Row,Tag} from "antd";
+import {UpCircleOutlined,DownCircleOutlined} from "@ant-design/icons";
 import SearchForm from "./form";
 import Submit from "./submit";
 import moment from "moment";
@@ -35,7 +36,9 @@ class SearchWrapper extends React.Component{
 								showForm?"收起":"展开"
 							}
 						</span>
-						<Icon className={"toggle-icon"} type={showForm?"up-circle":"down-circle"}/>
+						{
+							showForm?<UpCircleOutlined/>:<DownCircleOutlined/>
+						}
 					</div>
 				</div>
 				<Row className={`search-wrapper-form ${showForm?"show":"hide"}`}>

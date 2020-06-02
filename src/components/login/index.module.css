@@ -2,11 +2,14 @@
 	height: 100vh;
 	background: url("../../static/login-bg.svg") no-repeat center;
 	background-size: contain;
+	text-align: center;
 }
 .formWrapper{
 	width: 500px;
 	margin: 25vh auto 0;
 	padding: 50px;
+	display: inline-block;
+	text-align: initial;
 	border: 1px solid rgba(0, 0, 0, 0.09);
 	border-radius: 5px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
@@ -17,6 +20,7 @@
 	text-align: center;
 	font-size: 30px;
 	font-family: cursive;
+	margin: 20px 0 30px;
 }
 .loginBtn{
 	width: 100%;

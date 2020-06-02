@@ -1,5 +1,6 @@
 import React from "react";
-import {Tooltip,Icon} from "antd";
+import {Tooltip} from "antd";
+import {EditOutlined,DeleteOutlined} from "@ant-design/icons";
 import ETable from "../../../components/e-table";
 import {getPublishedArticle} from "../../../data/request";
 
@@ -30,10 +31,10 @@ export default class extends React.Component{
 					{title:"操作",width:"100px",key:"handle",component:({data,getList})=>
 						<div>
 							<Tooltip title={"编辑"}>
-								<Icon type={"edit"} className={"table-icon"}/>
+								<EditOutlined className={"table-icon"} />
 							</Tooltip>
 							<Tooltip title={"删除"}>
-								<Icon type={"delete"} className={"table-icon"}/>
+								<DeleteOutlined className={"table-icon"}/>
 							</Tooltip>
 						</div>
 					}

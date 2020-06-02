@@ -1,5 +1,6 @@
 import React from "react";
-import {Form,Button,Icon,Row,Col,message,Input} from "antd";
+import {Form,Button,Row,Col,message,Input} from "antd";
+import {CloudUploadOutlined} from "@ant-design/icons";
 import {uploadFile} from "../../../data/request";
 import Thumbnail from "../../../components/thumbnail";
 import rndm from "rndm";
@@ -9,46 +10,32 @@ const layout = {
 	wrapperCol:{span:18}
 };
 
-export default Form.create()(class extends React.Component{
+export default class extends React.Component{
 	render(){
-		const {getFieldDecorator} = this.props.form;
 		const {data={},type} = this.props;
 		return(
 			<Form {...layout}>
 				{
 					type !== "edit" &&
-					<Form.Item label={"图片"}>
-						{
-							getFieldDecorator("src",{
-								initialValue:data.src || "",
-								rules:[
-									{required:true,message:"请上传图片！"}
-								]
-							})(
-								<UploadFile/>
-							)
-						}
+					<Form.Item label={"图片"} name={"src"} rules={[
+						{required:true,message:"请上传图片！"}
+					]}>
+						<UploadFile/>
 					</Form.Item>
 				}
-				<Form.Item label={"描述"}>
-					{
-						getFieldDecorator("desc",{
-							initialValue:data.desc || ""
-						})(
-							<Input.TextArea
-								rows={4}
-								autoComplete={"off"}
-								placeholder={"描述信息（200个字符以内）"}
-								maxLength={200}
-								style={{resize:"none"}}
-							/>
-						)
-					}
+				<Form.Item label={"描述"} name={"desc"}>
+					<Input.TextArea
+						rows={4}
+						autoComplete={"off"}
+						placeholder={"描述信息（200个字符以内）"}
+						maxLength={200}
+						style={{resize:"none"}}
+					/>
 				</Form.Item>
 			</Form>
 		)
 	}
-});
+}
 
 class UploadFile extends React.Component{
 	static defaultProps={
@@ -67,7 +54,7 @@ class UploadFile extends React.Component{
 		return(
 			<div>
 				<div>
-					<Button type={"primary"} onClick={this.triggerClick}><Icon type={"upload"}/>上传</Button>
+					<Button type={"primary"} onClick={this.triggerClick}><CloudUploadOutlined />上传</Button>
 					<input style={{display:"none"}} type={"file"} id={this.inputId} accept={this.getAccept()} onChange={this.chooseFile}/>
 				</div>
 				<div>

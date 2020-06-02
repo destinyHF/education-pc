@@ -1,5 +1,6 @@
 import React from 'react';
 import {ConfigProvider} from "antd";
+import "antd/dist/antd.css";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 import moment from "moment";
 import Login from "./components/login";
@@ -10,7 +11,7 @@ export default class extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      redirect:false,//若为true，则渲染登录页面
+      redirect:true,//若为true，则渲染登录页面
     }
   }
   render(){

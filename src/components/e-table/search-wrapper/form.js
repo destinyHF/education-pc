@@ -6,7 +6,7 @@ const formItemStyle = {
 	minWidth:"175px"
 };
 
-export default Form.create()(class extends React.Component{
+export default class extends React.Component{
 	render(){
 		const {dataSource} = this.props;
 		return(
@@ -20,23 +20,22 @@ export default Form.create()(class extends React.Component{
 		)
 	}
 	formItem=(item)=>{
-		const {getFieldDecorator} = this.props.form;
 		const layout = {
 			radio:24,
 			checkbox:24
 		};
 		return(
 			<Col span={layout[item.type]} key={item.key}>
-				<Form.Item label={item.label} key={item.key}>
+				<Form.Item
+					label={item.label}
+					key={item.key}
+					name={item.key}
+					rules={[
+						{required:false}
+					]}
+				>
 					{
-						getFieldDecorator(item.key,{
-							initialValue:item.defaultValue || getDefaultValue(item),
-							rules:[
-								{required:false}
-							]
-						})(
-							this.renderItem(item)
-						)
+						this.renderItem(item)
 					}
 				</Form.Item>
 			</Col>
@@ -62,7 +61,7 @@ export default Form.create()(class extends React.Component{
 				return null;
 		}
 	};
-})
+}
 
 class CheckboxForm extends React.Component{
 	render(){

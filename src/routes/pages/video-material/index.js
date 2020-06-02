@@ -1,5 +1,6 @@
 import React from "react";
-import {Tooltip,Icon,Modal,message} from "antd";
+import {Tooltip,Modal,message} from "antd";
+import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
 import ETable from "../../../components/e-table";
 import {getVideoMaterial,createVideoMaterial,deleteVideoMaterial,updateVideoMaterial} from "../../../data/request";
 import MaterialForm from "./form";
@@ -31,10 +32,10 @@ export default class extends React.Component{
 					{title:"操作",width:"100px",key:"handle",component:({data,getList})=>
 						<div>
 							<Tooltip title={"编辑"} onClick={()=>this.editMaterial(data,getList)}>
-								<Icon type={"edit"} className={"table-icon"}/>
+								<EditOutlined className={"table-icon"} />
 							</Tooltip>
 							<Tooltip title={"删除"} onClick={()=>this.deleteMaterial([data],getList)}>
-								<Icon type={"delete"} className={"table-icon"}/>
+								<DeleteOutlined className={"table-icon"}/>
 							</Tooltip>
 						</div>
 					}
