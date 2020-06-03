@@ -5,6 +5,7 @@ import {Spin} from "antd";
 
 const API = {
 	common:{
+		autoLogin:"/auth/autoLogin",//自动登录
 		login:"/auth/login",//登录
 		getArticleDetail:"/getArticleDetail",//获取文章详情
 		createArticle:"/createArticle",//创建文章

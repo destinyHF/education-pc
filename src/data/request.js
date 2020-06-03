@@ -1,5 +1,11 @@
 import {API,$http} from "./api";
 
+/*自动登录接口*/
+export function autoLogin(){
+	return $http({
+		url:API.common.autoLogin
+	})
+}
 /*登录接口*/
 export function login(data={}){
 	return $http({

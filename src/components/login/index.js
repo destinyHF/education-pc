@@ -67,6 +67,7 @@ class SubmitForm extends React.Component{
 	onFinish=(values)=>{
 		login(values).then(response=>{
 			message.success("登录成功！",1.5,()=>{
+				sessionStorage.setItem("token",response.token);
 				window.location.reload();
 			});
 		}).catch(error=>{

@@ -6,6 +6,7 @@ import moment from "moment";
 import Login from "./components/login";
 import Layout from "./components/layout";
 moment.locale("zh-cn");
+import {autoLogin} from "./data/request";
 
 export default class extends React.Component{
   constructor(props) {
@@ -23,5 +24,11 @@ export default class extends React.Component{
         }
       </ConfigProvider>
     )
+  }
+  componentDidMount() {
+    autoLogin().then(({token})=>{
+      sessionStorage.setItem("token",token);
+      this.setState({redirect:false})
+    }).catch(err);
   }
 }
