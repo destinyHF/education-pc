@@ -1,5 +1,5 @@
 import React from "react";
-import {Row,Tag} from "antd";
+import {Row,Tag,Col} from "antd";
 import {UpCircleOutlined,DownCircleOutlined} from "@ant-design/icons";
 import SearchForm from "./form";
 import Submit from "./submit";
@@ -21,7 +21,7 @@ class SearchWrapper extends React.Component{
 		const {dataSource} = this.props;
 		const {showForm} = this.state;
 		return(
-			<Row className={"search-wrapper"}>
+			<div className={"search-wrapper"}>
 				<div className={"search-wrapper-title"}>
 					<div className={"title"}>
 						<span>检索条件：</span>
@@ -41,19 +41,21 @@ class SearchWrapper extends React.Component{
 						}
 					</div>
 				</div>
-				<Row className={`search-wrapper-form ${showForm?"show":"hide"}`}>
-					<SearchForm ref={this.formRef} dataSource={dataSource}/>
+				<div className={`search-wrapper-form ${showForm?"show":"hide"}`}>
+					<SearchForm instance={this.formRef} dataSource={dataSource}/>
 					<Submit onSubmit={this.onSubmit} onReset={this.onReset}/>
-				</Row>
-			</Row>
+				</div>
+			</div>
 		)
 	}
 	onSubmit=()=>{
 		const {callback} = this.props;
 		const {validateFields} = this.formRef.current;
-		validateFields((error,values)=>{
+		validateFields().then(values=>{
 			callback(values,true);
-		})
+		}).catch(error=>{
+			console.log(error);
+		});
 	};
 	onReset=()=>{
 		const {dataSource,callback} = this.props;

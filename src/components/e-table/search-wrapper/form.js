@@ -8,9 +8,9 @@ const formItemStyle = {
 
 export default class extends React.Component{
 	render(){
-		const {dataSource} = this.props;
+		const {dataSource,instance} = this.props;
 		return(
-			<Form style={{display:"flex",flexWrap:"wrap"}}>
+			<Form ref={instance} style={{display:"flex",flexWrap:"wrap"}}>
 				{
 					dataSource.map(item=>
 						this.formItem(item)
@@ -33,6 +33,7 @@ export default class extends React.Component{
 					rules={[
 						{required:false}
 					]}
+					initialValue={item.defaultValue || ""}
 				>
 					{
 						this.renderItem(item)

@@ -16,7 +16,7 @@ export default class extends React.Component{
 		const {dataSource,pagination,tableColumn,rowKey,scrollX,rowSelection} = this.props;
 		const {columns,isScroll} = this.filterColumn(tableColumn);
 		return(
-			<Row className={"table-wrapper"}>
+			<div className={"table-wrapper"}>
 				{
 					!!(rowSelection || {selectedRowKeys:[]}).selectedRowKeys.length &&
 						<Alert
@@ -58,7 +58,7 @@ export default class extends React.Component{
 						)
 					}
 				</Table>
-			</Row>
+			</div>
 		)
 	}
 	filterColumn=(tableColumn)=>{

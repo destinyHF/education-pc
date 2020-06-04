@@ -10,7 +10,7 @@ export default class extends React.Component{
 			<div className={style.container}>
 				<Col className={style.formWrapper}>
 					<div className={style.title}>内容管理系统</div>
-					<SubmitForm/>
+					<SubmitForm callback={this.props.callback}/>
 				</Col>
 			</div>
 		)
@@ -68,7 +68,7 @@ class SubmitForm extends React.Component{
 		login(values).then(response=>{
 			message.success("登录成功！",1.5,()=>{
 				sessionStorage.setItem("token",response.token);
-				window.location.reload();
+				this.props.callback(false);
 			});
 		}).catch(error=>{
 			message.error("用户名或密码错误！",2.5);

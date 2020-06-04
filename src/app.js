@@ -5,8 +5,10 @@ import zhCN from "antd/lib/locale-provider/zh_CN";
 import moment from "moment";
 import Login from "./components/login";
 import Layout from "./components/layout";
-moment.locale("zh-cn");
 import {autoLogin} from "./data/request";
+
+moment.locale("zh-cn");
+
 
 export default class extends React.Component{
   constructor(props) {
@@ -20,7 +22,10 @@ export default class extends React.Component{
     return(
       <ConfigProvider locale={zhCN}>
         {
-          redirect?<Login/>:<Layout/>
+          redirect?
+              <Login redirect={redirect} callback={redirect=>this.setState({redirect})}/>
+              :
+              <Layout/>
         }
       </ConfigProvider>
     )
@@ -29,6 +34,8 @@ export default class extends React.Component{
     autoLogin().then(({token})=>{
       sessionStorage.setItem("token",token);
       this.setState({redirect:false})
-    }).catch(err);
+    }).catch(err=>{
+      console.info(err);
+    });
   }
 }

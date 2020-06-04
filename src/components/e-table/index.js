@@ -1,5 +1,5 @@
 import React from "react";
-import {message,Row} from "antd";
+import {message,Row,Col} from "antd";
 import "./index.less";
 import SearchForm from "./search-wrapper";
 import HandleGroups from "./handle-wrapper";
@@ -41,60 +41,54 @@ class ETable extends React.Component{
 		const {conditions,handleBtn,rowKey,handleCallback,scrollX,tableColumn,selectable,selectType} = this.props;
 		const {searchDataOrigin,dataSource,currentPage,pageSize,total,totalPage,selectedRowKeys,selectedRows,recordRows} = this.state;
 		return(
-			<Row className={"table-choose"}>
+			<div className={"table-choose"}>
 				{
 					!!conditions.length &&
-					<Row>
-						<SearchForm values={searchDataOrigin} dataSource={conditions} callback={this.setSearchData}/>
-					</Row>
+					<SearchForm values={searchDataOrigin} dataSource={conditions} callback={this.setSearchData}/>
 				}
 				{
 					!!handleBtn.length &&
-					<Row>
-						<HandleGroups
-							dataSource={handleBtn}
-							selectedRows={selectedRows}
-							selectedRowKeys={selectedRowKeys}
-							callback={this.getResourceData}
-							handleCallback={handleCallback}
-							instance={this}
-						/>
-					</Row>
-				}
-				<Row>
-					<TableWrapper
-						dataSource={dataSource}
-						recordRows={recordRows}
-						recordCallback={value=>this.setState({recordRows:value})}
-						pagination={{
-							defaultCurrent:1,
-							current:currentPage,
-							pageSize,
-							total,
-							selectedRowKeys,
-							selectedRows,
-							showTotal:total=>`共${totalPage}页${total}条`,
-							style:{
-								margin:"40px 40px 40px 0"
-							},
-							showSizeChanger:true,
-							pageSizeOptions:["10","20","50","100","200","500"],
-							onChange:(currentPage,pageSize)=>this.getResourceData({currentPage,pageSize},false),
-							onShowSizeChange:(current,pageSize)=>this.getResourceData({currentPage,pageSize},true),
-							size:"default"
-						}}
-						tableColumn={tableColumn}
-						rowKey={rowKey}
-						scrollX={scrollX}
+					<HandleGroups
+						dataSource={handleBtn}
+						selectedRows={selectedRows}
+						selectedRowKeys={selectedRowKeys}
 						callback={this.getResourceData}
-						selectedCallback={this.tableSelect}
-						rowSelection={selectable?{
-							selectedRowKeys:selectedRowKeys,
-							type:selectType
-						}:null}
+						handleCallback={handleCallback}
+						instance={this}
 					/>
-				</Row>
-			</Row>
+				}
+				<TableWrapper
+					dataSource={dataSource}
+					recordRows={recordRows}
+					recordCallback={value=>this.setState({recordRows:value})}
+					pagination={{
+						defaultCurrent:1,
+						current:currentPage,
+						pageSize,
+						total,
+						selectedRowKeys,
+						selectedRows,
+						showTotal:total=>`共${totalPage}页${total}条`,
+						style:{
+							margin:"40px 40px 40px 0"
+						},
+						showSizeChanger:true,
+						pageSizeOptions:["10","20","50","100","200","500"],
+						onChange:(currentPage,pageSize)=>this.getResourceData({currentPage,pageSize},false),
+						onShowSizeChange:(current,pageSize)=>this.getResourceData({currentPage,pageSize},true),
+						size:"default"
+					}}
+					tableColumn={tableColumn}
+					rowKey={rowKey}
+					scrollX={scrollX}
+					callback={this.getResourceData}
+					selectedCallback={this.tableSelect}
+					rowSelection={selectable?{
+						selectedRowKeys:selectedRowKeys,
+						type:selectType
+					}:null}
+				/>
+			</div>
 		)
 	}
 	componentDidMount() {

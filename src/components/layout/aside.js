@@ -9,7 +9,7 @@ export default withRouter(class extends React.Component{
 	render(){
 		const {collapsed,location} = this.props;
 		return(
-			<Layout.Sider trigger={null} collapsible collapsed={collapsed} width={256}>
+			<Layout.Sider trigger={null} collapsible collapsed={collapsed}>
 				<div className={style.title} onClick={()=>this.pathTo(configs.defaultRoute)}>
 					<HomeOutlined theme="twoTone" className={style.logo}/>
 					{
@@ -33,6 +33,7 @@ export default withRouter(class extends React.Component{
 				return(
 					<Menu.SubMenu
 						key={item.key}
+						icon={item.icon}
 						title={
 							<span>
 								{/*<Icon type={item.icon}/>*/}

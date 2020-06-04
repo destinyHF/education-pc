@@ -1,3 +1,5 @@
+import React from "react";
+import {PicLeftOutlined,UnorderedListOutlined} from "@ant-design/icons"
 import Published from "./pages/published";
 import ArticleForm from "./pages/article-form";
 import ImgMaterial from "./pages/img-material";
@@ -12,7 +14,7 @@ const defaultRoute = "/published";
 const configs = [{
 	label:"新闻列表",
 	key:"newsList",
-	icon:"unordered-list",
+	icon:<PicLeftOutlined />,
 	children:[{
 		label:"新建文章",
 		path:"/articleForm",
@@ -28,7 +30,7 @@ const configs = [{
 },{
 	label:"素材库",
 	key:"material",
-	icon:"folder",
+	icon:<UnorderedListOutlined />,
 	children:[{
 		label:"图片",
 		path:"/imgMaterial",
