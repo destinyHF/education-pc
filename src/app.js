@@ -14,7 +14,7 @@ export default class extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      redirect:true,//若为true，则渲染登录页面
+      redirect:sessionStorage.setItem("token",token),//若为true，则渲染登录页面
     }
   }
   render(){
