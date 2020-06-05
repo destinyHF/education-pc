@@ -64,13 +64,11 @@ class SelfToolbar extends React.Component{
         return(
             <div>
                 <Button onClick={()=>this.uploadFile(this.imageInstance)} className={style.selfBtn} size={"small"} icon={<PictureOutlined />}>本地图片</Button>
-                <Upload ref={this.imageInstance} visible={false} resource={"image"}/>
-
+                <Upload ref={this.imageInstance} callback={this.imageCallback} visible={false} accept={"image/*"}/>
                 <Button onClick={()=>this.chooseMaterial("image")} className={style.selfBtn} size={"small"} icon={<PictureOutlined />}>图片库</Button>
 
                 <Button onClick={()=>this.uploadFile(this.videoInstance)} className={style.selfBtn} size={"small"} icon={<PictureOutlined />}>本地视频</Button>
-                <Upload ref={this.videoInstance} visible={false} resource={"video"}/>
-
+                <Upload ref={this.videoInstance} callback={this.videoCallback} visible={false} accept={"video/*"}/>
                 <Button onClick={()=>this.chooseMaterial("video")} className={style.selfBtn} size={"small"} icon={<PictureOutlined />}>视频库</Button>
 
             </div>
@@ -78,6 +76,12 @@ class SelfToolbar extends React.Component{
     }
     uploadFile=(instance)=>{
         instance.current.chooseFile();
+    };
+    imageCallback=(files)=>{
+        console.log(files);
+    };
+    videoCallback=(files)=>{
+        console.log(files);
     };
     chooseMaterial=(type)=>{
 

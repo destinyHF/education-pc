@@ -14,7 +14,7 @@ export default class extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      redirect:sessionStorage.setItem("token",token),//若为true，则渲染登录页面
+      redirect:!sessionStorage.getItem("token"),//若为true，则渲染登录页面
     }
   }
   render(){
@@ -35,7 +35,7 @@ export default class extends React.Component{
       sessionStorage.setItem("token",token);
       this.setState({redirect:false})
     }).catch(err=>{
-      console.info(err);
+      this.setState({redirect:true})
     });
   }
 }

@@ -5,8 +5,9 @@ import rndm from "rndm";
 
 export default class extends React.Component{
     static defaultProps = {
-        resource:"image",//默认资源类型为图片
+        accept:"image/*",//默认资源类型为图片
         visible:true,//默认可见
+        callback:()=>{}
     }
     constructor(props) {
         super(props);
@@ -17,12 +18,12 @@ export default class extends React.Component{
 
     }
     render(){
-        const {visible} = this.props;
+        const {visible,accept} = this.props;
         return(
             <div style={{display:visible?"initial":"none"}}>
                 <div>
                     <Button id={this.btnId} onClick={this.chooseFile} type={"primary"} icon={<CloudUploadOutlined/>}>文件上传</Button>
-                    <input id={this.inputId} onChange={this.fileChange} type={"file"} style={{display:"none"}} />
+                    <input accept={accept} id={this.inputId} onChange={this.fileChange} type={"file"} style={{display:"none"}} />
                 </div>
             </div>
         )
@@ -33,9 +34,9 @@ export default class extends React.Component{
         input.click();
     }
     fileChange=(e)=>{
-        const dom = e.target;
-        const files = dom.files;
-        console.log(files);
+        const input = e.target;
+        const files = input.files;
+        this.props.callback(files);
     }
 
 }
