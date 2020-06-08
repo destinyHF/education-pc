@@ -31,11 +31,11 @@ export default class extends React.Component{
     )
   }
   componentDidMount() {
-    autoLogin().then(({token})=>{
-      sessionStorage.setItem("token",token);
-      this.setState({redirect:false})
-    }).catch(err=>{
-      this.setState({redirect:true})
-    });
+    // autoLogin().then(({token})=>{
+    //   sessionStorage.setItem("token",token);
+    //   this.setState({redirect:false})
+    // }).catch(err=>{
+    //   this.setState({redirect:true})
+    // });
   }
 }

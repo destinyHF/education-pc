@@ -11,10 +11,12 @@ export function login(data={}){
 	return $http({
 		url:API.common.login,
 		data,
-		testData:{
-			code:"success",
-			data:"登录成功"
-		}
+	})
+}
+/*登出接口*/
+export function logout(data={}){
+	return $http({
+		url:API.common.logout,
 	})
 }
 /*获取文章内容*/

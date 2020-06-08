@@ -4,6 +4,7 @@ import Published from "./pages/published";
 import ArticleForm from "./pages/article-form";
 import ImgMaterial from "./pages/img-material";
 import VideoMaterial from "./pages/video-material";
+import UserManage from "./pages/user-manage";
 /*
 * 默认路由
 * */
@@ -40,6 +41,12 @@ const configs = [{
 		path:"/videoMaterial",
 		component:VideoMaterial
 	}],
+},{
+	label:"用户管理",
+	key:"userManage",
+	path:"/userManage",
+	icon:<UnorderedListOutlined />,
+	component:UserManage
 }];
 const otherConfigs = [];
 

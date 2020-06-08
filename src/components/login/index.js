@@ -30,7 +30,7 @@ class SubmitForm extends React.Component{
 			<Form {...layout} onFinish={this.onFinish}>
 				<Form.Item
 					label={"用户名"}
-					name={"username"}
+					name={"userName"}
 					rules={[
 						{required:"true",message:"请输入用户名！"}
 					]}
@@ -55,9 +55,9 @@ class SubmitForm extends React.Component{
 						prefix={<LockOutlined  style={{color: 'rgba(0,0,0,.25)'}}/>}
 					/>
 				</Form.Item>
-				<Form.Item name={"remember"} {...tailLayout} initialValue={true} valuePropName="checked">
-					<Checkbox>自动登录</Checkbox>
-				</Form.Item>
+				{/*<Form.Item name={"remember"} {...tailLayout} initialValue={true} valuePropName="checked">*/}
+				{/*	<Checkbox>自动登录</Checkbox>*/}
+				{/*</Form.Item>*/}
 				<Row>
 					<Button type="primary" htmlType="submit" className={style.loginBtn}>登录</Button>
 				</Row>
@@ -68,10 +68,11 @@ class SubmitForm extends React.Component{
 		login(values).then(response=>{
 			message.success("登录成功！",1.5,()=>{
 				sessionStorage.setItem("token",response.token);
+				sessionStorage.setItem("userInfo",JSON.stringify(response));
 				this.props.callback(false);
 			});
 		}).catch(error=>{
-			message.error("用户名或密码错误！",2.5);
+			message.error(error,2.5);
 		})
 	}
 }

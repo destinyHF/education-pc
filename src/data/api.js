@@ -6,7 +6,8 @@ import {Spin} from "antd";
 const API = {
 	common:{
 		autoLogin:"/auth/autoLogin",//自动登录
-		login:"/auth/login",//登录
+		login:"/login",//登录
+		logout:"/logout",//登出
 		getArticleDetail:"/getArticleDetail",//获取文章详情
 		createArticle:"/createArticle",//创建文章
 		updateArticle:"/updateArticle",//编辑文章
@@ -22,6 +23,9 @@ const API = {
 		createVideoMaterial:"/createVideoMaterial",//新建视频素材
 		deleteVideoMaterial:"/deleteVideoMaterial",//删除视频素材
 		updateVideoMaterial:"/updateVideoMaterial",//更新视频素材
+	},
+	user:{
+		getUserList:"/"
 	}
 };
 
@@ -34,7 +38,6 @@ const $http = function({
 	headers={},
 	responseType="json",
 	timeout=10000,
-	testData,
 }){
 	if(headers["Content-Type"] === "multipart/form-data"){
 		const formData = new FormData();
@@ -53,17 +56,16 @@ const $http = function({
 			headers,
 			responseType
 		}).then(response=>{
-			if(response.data.code === "success"){
-				resolve(response.data);
+			const {data:resData} = response;
+			const {meta={},data={}} = resData;
+			const {code,msg} = meta;
+			if(code === "200" || code === 200){
+				resolve(data);
 			}else{
-				reject("error");
+				reject(msg || "接口异常！");
 			}
-		}).catch((error)=>{
-			if(testData){
-				resolve(testData);
-			}else{
-				reject(error.message);
-			}
+		}).catch(error=>{
+			reject(error.message);
 		}).then(()=>{
 			close();
 		});
