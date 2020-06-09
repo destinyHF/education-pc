@@ -5,7 +5,7 @@ import React from "react";
 import {Tooltip,message,Modal} from "antd";
 import {EditOutlined,DeleteOutlined} from "@ant-design/icons";
 import ETable from "../../../components/e-table";
-import {getUserList} from "./request";
+import {getUserList,createUser} from "./request";
 import moment from "moment";
 import StatusText from "../../../components/status-text";
 import UpdateForm from "./modal/update";
@@ -31,7 +31,7 @@ export default class extends React.Component{
                     {title:"邮箱",key:"email",width:"200px"},
                     {title:"创建时间",width:"200px",key:"createTime",component:({data})=>moment(data.createTime).format("YYYY-MM-DD HH:mm:ss")},
                     {title:"状态",key:"status",component:({data})=>
-                        <StatusText value={data.status} dataSource={[
+                        <StatusText value={data.state} dataSource={[
                             {code:true,color:"success",text:"已启用"},
                             {code:false,color:"danger",text:"已禁用"}
                         ]}/>
@@ -55,19 +55,30 @@ export default class extends React.Component{
     handleCallback=(key,selectedRowKeys,selectedRows,callback)=>{
         switch (key) {
             case "create":
-                this.createUser();break;
+                this.createUser(callback);break;
             default:
                 return;
         }
     };
-    createUser=()=>{
+    createUser=(callback)=>{
         const formRef = React.createRef();
         Modal.confirm({
             title:"添加用户",
             width:600,
             content:<UpdateForm formRef={formRef}/>,
             onOk:(close)=>{
-
+                formRef.current.validateFields().then(values=>{
+                    const reqData = {...values};
+                    delete reqData.confirm;
+                    reqData.roleIds = [reqData.roleIds];
+                    createUser(reqData).then(()=>{
+                        message.success("操作成功！",1.5);
+                        close();
+                        callback();
+                    }).catch(error=>{
+                        message.error(error,2.5);
+                    })
+                }).catch(e=>console.log(e))
             }
         })
     };

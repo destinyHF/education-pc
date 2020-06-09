@@ -27,16 +27,6 @@ code {
 .ant-modal-confirm-content{
   margin-left: 0 !important;
 }
-/*富文本编辑器样式重置*/
-.edui-box,.edui-editor-toolbarbox{
-  line-height: initial;
-}
-.edui-default .edui-toolbar .edui-combox-body .edui-button-body{
-  width: auto !important;
-}
-.edui-default .edui-toolbar .edui-combox-body .edui-arrow{
-  width: 12px !important;
-}
 /*通用文本样式*/
 .text-primary{
   color: #1890ff;

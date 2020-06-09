@@ -3,8 +3,8 @@ import {ConfigProvider} from "antd";
 import "antd/dist/antd.css";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 import moment from "moment";
-import Login from "./components/login";
-import Layout from "./components/layout";
+import Login from "./structure/login";
+import Layout from "./structure/layout";
 import {autoLogin} from "./data/request";
 
 moment.locale("zh-cn");

@@ -154,15 +154,14 @@ class ETable extends React.Component{
 		if(dynamic){
 			if(isRequest){
 				this.props.dataSource(reqData).then((response={})=>{
-					const {data={}} = response;
-					if(data instanceof Array){
-						originDataSource = data;
+					if(response instanceof Array){
+						originDataSource = response;
 						dataSource = originDataSource.slice(0,pageSize);
-						total = data.length;
+						total = response.length;
 						totalPage = Math.ceil(total/pageSize);
 						currentPage = 1;
-					}else if(data.__proto__ === Object.prototype){
-						const {list=[],page={}} = data;
+					}else if(response.__proto__ === Object.prototype){
+						const {data:list=[],page={}} = response;
 						originDataSource = [];
 						dataSource = list;
 						total = page.totalSize;
@@ -180,9 +179,8 @@ class ETable extends React.Component{
 					callback();
 				}else{
 					this.props.dataSource(reqData).then(response=>{
-						const {data} = response;
-						if(data){
-							const {list=[],page={}} = data;
+						if(response){
+							const {data:list=[],page={}} = response;
 							dataSource = list;
 							total = page.totalSize;
 							totalPage = page.totalPage;

@@ -25,7 +25,9 @@ const API = {
 		updateVideoMaterial:"/updateVideoMaterial",//更新视频素材
 	},
 	user:{
-		getUserList:"/"
+		getUserList:"/user/userList",
+		getRoleList:"/sys/role/roleList",
+		createUser:"/user/userAdd"
 	}
 };
 
@@ -38,7 +40,11 @@ const $http = function({
 	headers={},
 	responseType="json",
 	timeout=10000,
+	params={}
 }){
+	if(method.toLocaleLowerCase === "get"){
+		params = data;
+	}
 	if(headers["Content-Type"] === "multipart/form-data"){
 		const formData = new FormData();
 		Object.entries(data).forEach(item=>{
@@ -52,6 +58,7 @@ const $http = function({
 			url,
 			method,
 			data,
+			params,
 			timeout,
 			headers,
 			responseType

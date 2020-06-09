@@ -4,7 +4,7 @@ import style from "./index.module.css";
 // import UEditor from "./editor";
 // import DraftEditor from "./draft-editor";
 import WangEditor from "./wang-editor";
-import {parseParams} from "../../../tools/common";
+import {parseParams} from "../../../utility/common";
 import {getArticleDetail,createArticle,updateArticle} from "../../../data/request";
 
 

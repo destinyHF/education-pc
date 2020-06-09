@@ -1,5 +1,6 @@
 import React from "react";
-import {Form,Input} from "antd";
+import {Form,Input,message,Radio} from "antd";
+import {getRoleList} from "../request";
 
 const layout = {
     labelCol:{span:4},
@@ -7,8 +8,15 @@ const layout = {
 }
 
 export default class extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            ruleList:[]
+        }
+    }
     render(){
         const {initialValues = {},formRef} = this.props;
+        const {ruleList} = this.state;
         return(
             <Form ref={formRef} initialValues={initialValues} {...layout}>
                 <Form.Item label={"昵称"} name={"name"} rules={[
@@ -58,7 +66,29 @@ export default class extends React.Component{
                 >
                     <Input autoComplete={"off"} maxLength={30}/>
                 </Form.Item>
+                <Form.Item
+                    label="角色"
+                    name="roleIds"
+                    rules={[
+                        {required:true,message: "必填！"},
+                    ]}
+                >
+                    <Radio.Group>
+                        {
+                            ruleList.map(item=>
+                                <Radio key={item.roleId} value={item.roleId}>{item.description}</Radio>
+                            )
+                        }
+                    </Radio.Group>
+                </Form.Item>
             </Form>
         )
+    }
+    componentDidMount() {
+        getRoleList({currentPage:1,pageSize:100}).then(response=>{
+            this.setState({ruleList:response})
+        }).catch(error=>{
+            message.error(error,2.5);
+        })
     }
 }
