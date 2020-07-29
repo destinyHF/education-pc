@@ -408,3 +408,233 @@ draft字段用于区分启用或者是草稿箱内容，true表示为草稿箱�
     "data": null
 	}
     ```
+ 
+ 
+### 三、专题模块
+
+#### 2.1 分页查询所有专题
+
+用于管理员管理专题页面查询列表
+
+
+* url：http://localhost:6666/topic/listTopicPage
+* method：GET
+* reqData：
+    ```
+    ?currentPage=1&pageSize=10
+    ```
+* resData:
+    ```
+    {
+        "meta": {
+            "code": 200,
+            "msg": "请求/处理成功！"
+        },
+        "data": {
+            "page": {
+                "currentPage": 1,
+                "pageSize": 10,
+                "totalPage": 1,
+                "totalSize": 2
+            },
+            "data": [
+                {
+                    "id": 1,
+                    "name": "dfa",
+                    "description": "sdf",
+                    "status": "OFFLINE",
+                    "createTime": 1591745493000,
+                    "updateTime": 1591745497000,
+                    "createBy": "sdfa",
+                    "updateBy": "sdaf"
+                }
+            ]
+        }
+    }
+    ```
+
+#### 2.2 查询上线专题
+
+用于编辑文章时查询专题列表，添加专题到文章
+
+* url：http://localhost:6666/topic/listTopicPage
+* method：GET
+* reqData：
+    ```
+    无
+    ```
+* resData:
+    ```
+    {
+        "meta": {
+            "code": 200,
+            "msg": "请求/处理成功！"
+        },
+        "data": [
+            {
+                "id": 2,
+                "name": "tt",
+                "description": "tt",
+                "status": "ONLINE",
+                "createTime": 1591745508000,
+                "updateTime": 1591745512000,
+                "createBy": "tt",
+                "updateBy": "tt"
+            }
+        ]
+    }
+    ```
+
+#### 2.3 添加专题
+
+* url：http://localhost:6666/topic/createTopic
+* method：POST
+* reqData：
+    ```
+    {
+        "name": "tt",
+        "description": "tt"
+    }
+    ```
+* resData:
+    ```
+    {
+    "meta": {
+        "code": 200,
+        "msg": "添加内容成功！"
+    },
+    "data": null
+	}
+
+#### 2.4 修改专题
+
+* url：http://localhost:6666/topic/updateTopic
+* method：PUT
+* reqData：
+    ```
+    {
+        "name": "tt",
+        "description": "tt"
+    }
+    ```
+* resData:
+    ```
+    {
+    "meta": {
+        "code": 200,
+        "msg": "添加内容成功！"
+    },
+    "data": null
+	}
+
+#### 2.5 上线专题
+
+* url：http://localhost:6666/topic/onlineTopic
+* method：GET
+* reqData：
+    ```
+    ?id=123
+    ```
+* resData:
+    ```
+    {
+    "meta": {
+        "code": 200,
+        "msg": "成功！"
+    },
+    "data": null
+	}
+
+#### 2.5 下线专题
+
+* url：http://localhost:6666/topic/offlineTopic
+* method：GET
+* reqData：
+    ```
+    ?id=123
+    ```
+* resData:
+    ```
+    {
+    "meta": {
+        "code": 200,
+        "msg": "成功！"
+    },
+    "data": null
+	}
+
+#### 2.6 删除专题
+
+* url：http://localhost:6666/topic/delTopic
+* method：GET
+* reqData：
+    ```
+    ?id=123
+    ```
+* resData:
+    ```
+    {
+    "meta": {
+        "code": 200,
+        "msg": "成功！"
+    },
+    "data": null
+	}
+
+### 四、文件上传模块
+
+#### 2.1 上传文件
+
+图片或文件通过该接口上传到app，app把文件以ftp方式上传到nginx服务器，返回的路径为
+/images/s1/dj/8Yn4sdHS5vq.jpg等，前端使用时需加上前端访问的应用的域名或IP
+
+
+* url：http://localhost:6666/img/upload
+* method：POST
+* reqData：
+    ```
+    无
+    ```
+* resData:
+    ```
+    {
+        "meta": {
+            "code": 200,
+            "msg": "请求/处理成功！"
+        },
+        "data": [
+            {
+                "msg": "success",
+                "name": "环境相关.txt",
+                "size": 371,
+                "type": "text/plain",
+                "url": "/images/s1/w3/SnzhXmCNgF7.txt"
+            }
+        ]
+    }
+    ```
+
+#### 2.1 文件删除
+
+不用的图片或文件可调用此接口删除文件，减轻服务器存储压力
+/images/s1/dj/8Yn4sdHS5vq.jpg等，前端使用时需加上前端访问的应用的域名或IP
+
+
+* url：http://localhost:6666/img/delete
+* method：POST
+* reqData：
+    ```
+    {
+        "list":["/images/s1/dj/8Yn4sdHS5vq.jpg","/images/s1/dj/SnzhXmCNgF7.jpg"]
+    }
+    ```
+* resData:
+    ```
+    {
+        "meta": {
+            "code": 200,
+            "msg": ""
+        },
+        "data": null
+    }
+    ```

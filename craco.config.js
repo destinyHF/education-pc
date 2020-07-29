@@ -3,7 +3,7 @@ const CracoAntDesignPlugin = require("craco-antd");
 const CracoAlias = require("craco-alias");
 const CracoLessPlugin = require("craco-less");
 
-const proxyIP = "http://127.0.0.1:7001";
+const proxyIP = "http://221.237.108.131:81";
 
 module.exports = {
   plugins:[
@@ -32,10 +32,10 @@ module.exports = {
   ],
   devServer:{
     proxy:{
-      "/edu-pc":{
+      "/edu":{
         target:proxyIP,
         changeOrigin:true,
-        pathRewrite:{"^/edu-pc":"/"},
+        pathRewrite:{"^/edu":"/edu"},
         secure:false
       }
     }

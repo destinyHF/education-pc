@@ -31,7 +31,7 @@ const API = {
 	}
 };
 
-axios.defaults.baseURL = "/edu-pc";
+axios.defaults.baseURL = "/edu";
 axios.defaults.headers.post["Content-Type"] = 'application/json';
 const $http = function({
 	url="",

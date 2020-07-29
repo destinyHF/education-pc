@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {Spin} from "antd";
 import React from "react";
 
-axios.defaults.baseURL = "/edu-pc";
+axios.defaults.baseURL = "/edu";
 axios.defaults.headers.post["Content-Type"] = 'application/json';
 axios.defaults.headers.get["Content-Type"] = 'application/x-www-form-urlencoded';
 axios.defaults.timeout = 10000;
