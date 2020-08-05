@@ -13,6 +13,12 @@ import UpdateForm from "./modal/update";
 const conditions = [
     {label:"用户名",type:"input",key:"userName"},
     {label:"昵称",type:"input",key:"name"},
+    {label:"状态",type:"select",key:"state",options:[
+            {label:"全部",value:""},
+            {label:"已启用",value:true},
+            {label:"已禁用",value:false},
+        ]
+    },
 ];
 const handleBtn = [
     {key:"create",name:"添加",type:"primary",relation:"none"}
