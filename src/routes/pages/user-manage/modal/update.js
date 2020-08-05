@@ -60,7 +60,7 @@ export default class extends React.Component{
                     label="邮箱"
                     name="email"
                     rules={[
-                        {required:true,message: "必填！"},
+                        {required:false,message: ""},
                         {type:"email", message: "邮箱格式错误！"},
                     ]}
                 >

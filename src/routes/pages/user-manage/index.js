@@ -3,7 +3,7 @@
 * */
 import React from "react";
 import {Tooltip,message,Modal} from "antd";
-import {EditOutlined,DeleteOutlined,LockOutlined,QuestionCircleOutlined} from "@ant-design/icons";
+import {EditOutlined,DeleteOutlined,LockOutlined,QuestionCircleOutlined,UnlockOutlined} from "@ant-design/icons";
 import ETable from "../../../components/e-table";
 import {getUserList,createUser,switchUserStatus,updateUser,deleteUser} from "./request";
 import moment from "moment";
@@ -34,16 +34,17 @@ export default class extends React.Component{
                 handleBtn={handleBtn}
                 handleCallback={this.handleCallback}
                 tableColumn={[
-                    {title:"用户名",key:"userName"},
                     {title:"昵称",key:"name"},
+                    {title:"用户名",key:"userName"},
+                    {title:"角色",key:"role",component:({data})=><span>{data.roles[0] && data.roles[0].description}</span>},
+                    {title:"状态",key:"status",component:({data})=>
+                          <StatusText value={data.state} dataSource={[
+                              {code:true,color:"success",text:"已启用"},
+                              {code:false,color:"danger",text:"已禁用"}
+                          ]}/>
+                    },
                     {title:"邮箱",key:"email",width:"200px"},
                     {title:"创建时间",width:"200px",key:"createTime",component:({data})=>moment(data.createTime).format("YYYY-MM-DD HH:mm:ss")},
-                    {title:"状态",key:"status",component:({data})=>
-                        <StatusText value={data.state} dataSource={[
-                            {code:true,color:"success",text:"已启用"},
-                            {code:false,color:"danger",text:"已禁用"}
-                        ]}/>
-                    },
                     {title:"操作",width:"100px",key:"handle",component:({data,getList})=>
                         <div>
                             <Tooltip title={"编辑"}>
@@ -61,7 +62,7 @@ export default class extends React.Component{
                             {
                                 data.state === false &&
                                 <Tooltip title={"启用"}>
-                                    <LockOutlined onClick={()=>this.switchStatus(data.userId,!data.state,getList)} className={"table-icon"}/>
+                                    <UnlockOutlined onClick={()=>this.switchStatus(data.userId,!data.state,getList)} className={"table-icon"}/>
                                 </Tooltip>
                             }
                         </div>
@@ -105,8 +106,9 @@ export default class extends React.Component{
     editUser=(target,callback)=>{
         const formRef = React.createRef();
         const initialValues = {
-            ...target
-        }
+            ...target,
+            roleIds:target.roles[0].roleId
+        };
         delete initialValues.password;
         Modal.confirm({
             title:"编辑用户",
