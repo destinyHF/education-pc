@@ -36,13 +36,13 @@ export default class extends React.Component{
                 tableColumn={[
                     {title:"昵称",key:"name"},
                     {title:"用户名",key:"userName"},
-                    {title:"角色",key:"role",component:({data})=><span>{data.roles[0] && data.roles[0].description}</span>},
                     {title:"状态",key:"status",component:({data})=>
-                          <StatusText value={data.state} dataSource={[
-                              {code:true,color:"success",text:"已启用"},
-                              {code:false,color:"danger",text:"已禁用"}
-                          ]}/>
+                      <StatusText value={data.state} dataSource={[
+                          {code:true,color:"success",text:"已启用"},
+                          {code:false,color:"danger",text:"已禁用"}
+                      ]}/>
                     },
+                    {title:"角色",key:"role",component:({data})=><span>{data.roles[0] && data.roles[0].description}</span>},
                     {title:"邮箱",key:"email",width:"200px"},
                     {title:"创建时间",width:"200px",key:"createTime",component:({data})=>moment(data.createTime).format("YYYY-MM-DD HH:mm:ss")},
                     {title:"操作",width:"100px",key:"handle",component:({data,getList})=>
