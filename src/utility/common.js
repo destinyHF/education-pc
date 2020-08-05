@@ -1,4 +1,4 @@
-const parseParams = function(str=""){
+export function parseParams(str=""){
 	const rv = {};
 	if(str.substring(1) === ""){return rv}
 	str.substring(1).split("&").forEach(item=>{
@@ -6,8 +6,10 @@ const parseParams = function(str=""){
 		rv[key] = decodeURIComponent(value);
 	});
 	return rv;
-};
+}
 
-export {
-	parseParams
+export function parseObject(obj={}){
+	return Object.entries(obj).map(([key,value])=>{
+		return `${key}=${value}`;
+	}).join("&")
 }

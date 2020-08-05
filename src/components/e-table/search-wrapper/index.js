@@ -1,6 +1,6 @@
 import React from "react";
-import {Row,Tag,Col} from "antd";
-import {UpCircleOutlined,DownCircleOutlined} from "@ant-design/icons";
+import {Tag} from "antd";
+// import {UpCircleOutlined,DownCircleOutlined} from "@ant-design/icons";
 import SearchForm from "./form";
 import Submit from "./submit";
 import moment from "moment";
@@ -13,7 +13,7 @@ class SearchWrapper extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			showForm:false
+			showForm:true
 		};
 		this.formRef = React.createRef();
 	}
@@ -22,25 +22,25 @@ class SearchWrapper extends React.Component{
 		const {showForm} = this.state;
 		return(
 			<div className={"search-wrapper"}>
-				<div className={"search-wrapper-title"}>
-					<div className={"title"}>
-						<span>检索条件：</span>
-						{
-							!showForm &&
-							<span>{this.getSearchDescription()}</span>
-						}
-					</div>
-					<div className={"toggle-wrapper"} onClick={this.toggle}>
-						<span>
-							{
-								showForm?"收起":"展开"
-							}
-						</span>
-						{
-							showForm?<UpCircleOutlined/>:<DownCircleOutlined/>
-						}
-					</div>
-				</div>
+				{/*<div className={"search-wrapper-title"}>*/}
+				{/*	<div className={"title"}>*/}
+				{/*		<span>检索条件：</span>*/}
+				{/*		{*/}
+				{/*			!showForm &&*/}
+				{/*			<span>{this.getSearchDescription()}</span>*/}
+				{/*		}*/}
+				{/*	</div>*/}
+				{/*	<div className={"toggle-wrapper"} onClick={this.toggle}>*/}
+				{/*		<span>*/}
+				{/*			{*/}
+				{/*				showForm?"收起":"展开"*/}
+				{/*			}*/}
+				{/*		</span>*/}
+				{/*		{*/}
+				{/*			showForm?<UpCircleOutlined/>:<DownCircleOutlined/>*/}
+				{/*		}*/}
+				{/*	</div>*/}
+				{/*</div>*/}
 				<div className={`search-wrapper-form ${showForm?"show":"hide"}`}>
 					<SearchForm instance={this.formRef} dataSource={dataSource}/>
 					<Submit onSubmit={this.onSubmit} onReset={this.onReset}/>

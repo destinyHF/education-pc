@@ -21,10 +21,19 @@
   <component name="ChangeListManager">
     <list default="true" id="6d0123ae-3655-4142-8bde-9655d9806e02" name="Default Changelist" comment="commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/craco.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/craco.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/$http.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/$http.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/e-table/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/e-table/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/e-table/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/e-table/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/e-table/search-wrapper/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/e-table/search-wrapper/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/e-table/search-wrapper/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/e-table/search-wrapper/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/e-table/table-wrapper/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/e-table/table-wrapper/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/用户登录及内容API.md" beforeDir="false" afterPath="$PROJECT_DIR$/用户登录及内容API.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/user-manage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/user-manage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/user-manage/modal/update.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/user-manage/modal/update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/user-manage/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/user-manage/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/structure/layout/aside.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/structure/layout/aside.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/structure/layout/aside.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/structure/layout/aside.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utility/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/common.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +70,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/用户登录及内容API.md" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../project/test/zhyz/zhyz-admin" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -74,7 +83,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\houfei\software\WebStorm 2020.1.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
-    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/用户登录及内容API.md" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../../project/test/zhyz/zhyz-admin/src/structure/layout/aside.module.css" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -161,7 +170,10 @@
       <workItem from="1591778980982" duration="1794000" />
       <workItem from="1591855924115" duration="32000" />
       <workItem from="1591866102487" duration="392000" />
-      <workItem from="1596002845034" duration="2919000" />
+      <workItem from="1596002845034" duration="4238000" />
+      <workItem from="1596528577221" duration="80000" />
+      <workItem from="1596588097349" duration="2991000" />
+      <workItem from="1596612706131" duration="6745000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1582439090099</created>
@@ -282,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591683947144</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="commit">
+      <created>1596009438793</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1596009438793</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,34 +328,34 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="524" y="213" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1591320199474" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1596004322071">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1596616241168">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1596004322071" />
-    <state x="592" y="218" key="FileChooserDialogImpl" timestamp="1596004068032">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1596616241168" />
+    <state x="592" y="218" key="FileChooserDialogImpl" timestamp="1596618238278">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="592" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1596004068032" />
+    <state x="592" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1596618238278" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591068900554" />
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1596004363198">
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1596612813867">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596004363198" />
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596612813867" />
     <state width="1899" height="330" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591167820505" />
-    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1596004363198">
+    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1596612813866">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596004363198" />
+    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596612813866" />
     <state width="1899" height="330" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591167820505" />
-    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1596004363198">
+    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1596612813866">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596004363198" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596612813866" />
     <state width="1899" height="330" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591167820504" />
-    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1596004363198">
+    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1596612813866">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596004363198" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596612813866" />
     <state width="1899" height="330" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591167820505" />
     <state x="502" y="31" key="RollbackChangesDialog" timestamp="1591669343017">
       <screen x="0" y="0" width="1536" height="824" />
@@ -346,10 +365,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="150" y="36" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1591665714992" />
-    <state x="442" y="200" key="Vcs.Push.Dialog.v2" timestamp="1591683954036">
+    <state x="442" y="200" key="Vcs.Push.Dialog.v2" timestamp="1596009443574">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1591683954036" />
+    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596009443574" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591090846542" />
     <state x="530" y="20" width="570" height="804" key="find.popup" timestamp="1596004410218">
       <screen x="0" y="0" width="1536" height="824" />

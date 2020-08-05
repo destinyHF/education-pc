@@ -1,67 +1,79 @@
 import React from "react";
 import {Form,Checkbox,Input,Radio,Col,DatePicker,Select} from "antd";
-import {getDefaultValue} from "../util";
 
 const formItemStyle = {
 	minWidth:"175px"
 };
-
+const layout = {
+	radio:24,
+	checkbox:24
+};
 export default class extends React.Component{
 	render(){
 		const {dataSource,instance} = this.props;
 		return(
-			<Form ref={instance} style={{display:"flex",flexWrap:"wrap"}}>
+			<Form
+				ref={instance}
+				style={{display:"flex",flexWrap:"wrap"}}
+			>
 				{
 					dataSource.map(item=>
-						this.formItem(item)
+						<Col span={layout[item.type]} key={item.key}>
+							<Form.Item
+								label={item.label}
+								rules={[
+									{required:false}
+								]}
+							>
+								{
+									item.type === "select" &&
+									<Form.Item name={item.key} noStyle={true} initialValue={item.defaultValue || ""}>
+										<SelectForm options={item.options}/>
+									</Form.Item>
+								}
+								{
+									item.type === "checkbox" &&
+									<Form.Item name={item.key} noStyle={true} initialValue={item.defaultValue || ""}>
+										<CheckboxForm options={item.options}/>
+									</Form.Item>
+								}
+								{
+									item.type === "input" &&
+									<Form.Item name={item.key} noStyle={true} initialValue={item.defaultValue || ""}>
+										<InputForm/>
+									</Form.Item>
+								}
+								{
+									item.type === "radio" &&
+									<Form.Item name={item.key} noStyle={true} initialValue={item.defaultValue || ""}>
+										<RadioForm options={item.options}/>
+									</Form.Item>
+								}
+								{
+									item.type === "date" &&
+									<Form.Item name={item.key} noStyle={true} initialValue={item.defaultValue || ""}>
+										<DatePicker style={formItemStyle} format={"YYYY-MM-DD"}/>
+									</Form.Item>
+								}
+								{
+									item.type === "time" &&
+									<Form.Item name={item.key} noStyle={true} initialValue={item.defaultValue || ""}>
+										<DatePicker style={formItemStyle} showTime={true} format={"HH:mm:ss"}/>
+									</Form.Item>
+								}
+								{
+									item.type === "dateTime" &&
+									<Form.Item name={item.key} noStyle={true} initialValue={item.defaultValue || ""}>
+										<DatePicker style={formItemStyle} showTime={true} format={"YYYY-MM-DD HH:mm:ss"}/>
+									</Form.Item>
+								}
+							</Form.Item>
+						</Col>
 					)
 				}
 			</Form>
 		)
 	}
-	formItem=(item)=>{
-		const layout = {
-			radio:24,
-			checkbox:24
-		};
-		return(
-			<Col span={layout[item.type]} key={item.key}>
-				<Form.Item
-					label={item.label}
-					key={item.key}
-					name={item.key}
-					rules={[
-						{required:false}
-					]}
-					initialValue={item.defaultValue || ""}
-				>
-					{
-						this.renderItem(item)
-					}
-				</Form.Item>
-			</Col>
-		)
-	};
-	renderItem=(item)=>{
-		switch (item.type) {
-			case "select":
-				return <SelectForm options={item.options}/>;
-			case "checkbox":
-				return <CheckboxForm options={item.options}/>;
-			case "input":
-				return <InputForm/>;
-			case "radio":
-				return <RadioForm options={item.options}/>;
-			case "date":
-				return <DatePicker style={formItemStyle} format={"YYYY-MM-DD"}/>;
-			case "time":
-				return <DatePicker style={formItemStyle} showTime={true} format={"HH:mm:ss"}/>;
-			case "dateTime":
-				return <DatePicker style={formItemStyle} showTime={true} format={"YYYY-MM-DD HH:mm:ss"}/>;
-			default:
-				return null;
-		}
-	};
 }
 
 class CheckboxForm extends React.Component{
@@ -105,12 +117,33 @@ class RadioForm extends React.Component{
 }
 
 class SelectForm extends React.Component{
+	constructor(props) {
+		super(props);
+		this.state = {
+			dataSource:[]
+		}
+	}
+	componentDidMount() {
+		const {options,defaultValue=""} = this.props;
+		if(options instanceof Function){
+			options().then(dataSource=>{
+				this.setState({
+					dataSource:[{label:"全部",value:defaultValue},...dataSource]
+				});
+			}).catch(e=>{console.log(e)})
+		}else if(Array.isArray(options)){
+			this.setState({
+				dataSource:options
+			});
+		}
+	}
 	render(){
-		const {options,value,onChange} = this.props;
+		const {value,onChange} = this.props;
+		const {dataSource} = this.state;
 		return(
 			<Select style={formItemStyle} value={value} onChange={onChange}>
 				{
-					options.map(item=>
+					dataSource.map(item=>
 						<Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
 					)
 				}

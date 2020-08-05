@@ -9,6 +9,7 @@
 	align-items: center;
 	height: 55px;
 	color: #fff;
+	white-space: nowrap;
 }
 .logo{
 	composes: title;

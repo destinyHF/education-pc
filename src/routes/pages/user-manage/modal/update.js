@@ -38,7 +38,7 @@ export default class extends React.Component{
                         {max:20,message:"不多于20个字符！"}
                     ]}
                 >
-                    <Input.Password />
+                    <Input.Password autoComplete={"new-password"}/>
                 </Form.Item>
                 <Form.Item label="确认密码" name="confirm" dependencies={["password"]} hasFeedback
                     rules={[

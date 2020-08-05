@@ -3,9 +3,9 @@
 * */
 import React from "react";
 import {Tooltip,message,Modal} from "antd";
-import {EditOutlined,DeleteOutlined} from "@ant-design/icons";
+import {EditOutlined,DeleteOutlined,LockOutlined,QuestionCircleOutlined} from "@ant-design/icons";
 import ETable from "../../../components/e-table";
-import {getUserList,createUser} from "./request";
+import {getUserList,createUser,switchUserStatus,updateUser,deleteUser} from "./request";
 import moment from "moment";
 import StatusText from "../../../components/status-text";
 import UpdateForm from "./modal/update";
@@ -20,8 +20,10 @@ const handleBtn = [
 
 export default class extends React.Component{
     render(){
+        const {title} = this.props;
         return(
             <ETable
+                title={title}
                 conditions={conditions}
                 handleBtn={handleBtn}
                 handleCallback={this.handleCallback}
@@ -44,6 +46,18 @@ export default class extends React.Component{
                             <Tooltip title={"删除"}>
                                 <DeleteOutlined onClick={()=>this.deleteUser(data,getList)} className={"table-icon"}/>
                             </Tooltip>
+                            {
+                                data.state === true &&
+                                <Tooltip title={"禁用"}>
+                                    <LockOutlined onClick={()=>this.switchStatus(data.userId,!data.state,getList)} className={"table-icon"}/>
+                                </Tooltip>
+                            }
+                            {
+                                data.state === false &&
+                                <Tooltip title={"启用"}>
+                                    <LockOutlined onClick={()=>this.switchStatus(data.userId,!data.state,getList)} className={"table-icon"}/>
+                                </Tooltip>
+                            }
                         </div>
                     }
                 ]}
@@ -83,9 +97,53 @@ export default class extends React.Component{
         })
     };
     editUser=(target,callback)=>{
-        console.log("编辑",target,callback);
+        const formRef = React.createRef();
+        const initialValues = {
+            ...target
+        }
+        delete initialValues.password;
+        Modal.confirm({
+            title:"编辑用户",
+            width:600,
+            content:<UpdateForm formRef={formRef} initialValues={initialValues}/>,
+            onOk:(close)=>{
+                formRef.current.validateFields().then(values=>{
+                    const reqData = {...values,userId:target.userId};
+                    delete reqData.confirm;
+                    reqData.roleIds = [reqData.roleIds];
+                    updateUser(reqData).then(()=>{
+                        message.success("操作成功！",1.5);
+                        close();
+                        callback();
+                    }).catch(error=>{
+                        message.error(error,2.5);
+                    })
+                }).catch(e=>console.log(e))
+            }
+        })
     };
-    deleteUser=(target,callback)=>{
-        console.log("删除",target,callback);
+    deleteUser=({userId},callback)=>{
+        Modal.confirm({
+            title:"删除",
+            icon:<QuestionCircleOutlined />,
+            content:"确认执行删除操作？",
+            onOk:(close)=>{
+                deleteUser({userId}).then(()=>{
+                    message.success("操作成功！",1.5);
+                    close();
+                    callback();
+                }).catch(error=>{
+                    message.error(error,2.5);
+                })
+            }
+        })
     };
+    switchStatus=(userId,state,callback)=>{
+        switchUserStatus({userId,state}).then(()=>{
+            message.success("操作成功！",1.5);
+            callback();
+        }).catch(error=>{
+            message.error(error,2.5);
+        })
+    }
 }

@@ -1,15 +1,17 @@
 .search-wrapper{
   background-color: rgb(255,255,255);
-  padding: 15px;
+  padding: 0 0 15px 0;
   border-radius: 3px;
-  margin-bottom: 10px;
+  .ant-form>.ant-col{
+    margin-bottom: 10px;
+  }
   .ant-form-item{
     display: flex;
     margin-bottom: 0;
     margin-right: 15px;
     .ant-form-item-label{
-      min-width: 120px;
-      max-width: 120px;
+      min-width: 100px;
+      max-width: 100px;
       text-overflow: ellipsis;
       .label{
         font-weight: bold;
@@ -40,6 +42,9 @@
   }
   .search-wrapper-form{
     overflow: hidden;
+    .ant-form-item-control{
+      min-width: 185px;
+    }
   }
   .search-wrapper-form.show{
     height: auto;
@@ -50,13 +55,11 @@
 }
 .handle-wrapper{
   background-color: rgb(255,255,255);
-  padding: 15px;
   border-radius: 3px;
-  margin-bottom: 10px;
 }
 .table-wrapper{
   background-color: rgb(255,255,255);
-  padding: 15px;
+  padding: 15px 0;
   border-radius: 3px;
   margin-bottom: 10px;
   .icon-hover{

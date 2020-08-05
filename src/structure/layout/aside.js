@@ -11,7 +11,7 @@ export default withRouter(class extends React.Component{
 		return(
 			<Layout.Sider trigger={null} collapsible collapsed={collapsed}>
 				<div className={style.title} onClick={()=>this.pathTo(configs.defaultRoute)}>
-					<HomeOutlined theme="twoTone" className={style.logo}/>
+					<HomeOutlined style={collapsed?{margin:"auto"}:{}} theme="twoTone" className={style.logo}/>
 					{
 						!collapsed &&
 						<div className={style.name}>CMS内容管理系统</div>
@@ -50,8 +50,7 @@ export default withRouter(class extends React.Component{
 				)
 			}else{
 				return(
-					<Menu.Item onClick={()=>this.pathTo(item.path)} key={item.path}>
-						{/*<Icon type={item.icon}/>*/}
+					<Menu.Item icon={item.icon} onClick={()=>this.pathTo(item.path)} key={item.path}>
 						<span>{item.label}</span>
 					</Menu.Item>
 				)

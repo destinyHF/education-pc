@@ -1,5 +1,5 @@
 import React from "react";
-import {Table,Row,Alert,Button} from "antd";
+import {Table,Alert,Button,Empty} from "antd";
 import rndm from "rndm";
 const {Column} = Table;
 
@@ -41,7 +41,10 @@ export default class extends React.Component{
 					pagination={pagination}
 					rowKey={rowKey}
 					scroll={(scrollX && isScroll)?{x:scrollX}:{}}
-					rowSelection={rowSelection?Object.assign(rowSelection,{onChange:this.rowSelect}):null}
+					rowSelection={rowSelection}
+					locale = {{
+						emptyText:<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+					}}
 				>
 					{
 						columns.map(item=>
@@ -84,10 +87,6 @@ export default class extends React.Component{
 	};
 	getList=(params={})=>{
 		this.props.callback({currentPage:1,...params},true);
-	};
-	rowSelect=(selectedRowKeys,selectedRows)=>{
-		const {selectedCallback} = this.props;
-		selectedCallback({selectedRowKeys,selectedRows});
 	};
 	resetSelected=()=>{
 		const {selectedCallback} = this.props;

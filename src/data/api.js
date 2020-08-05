@@ -1,7 +1,4 @@
-import axios from "axios";
-import React from "react";
-import ReactDOM from "react-dom";
-import {Spin} from "antd";
+import $http from "./$http";
 
 const API = {
 	common:{
@@ -25,66 +22,13 @@ const API = {
 		updateVideoMaterial:"/updateVideoMaterial",//更新视频素材
 	},
 	user:{
-		getUserList:"/user/userList",
+		getUserList:"/user/userList",//获取用户列表
+		switchUserStatus:"/user/switchStatus",//切换用户状态
+		createUser:"/user/userAdd",//创建用户
+		updateUser:"/user/userUpdate",//修改用户
+		deleteUser:"/user/userDel",//删除用户
 		getRoleList:"/sys/role/roleList",
-		createUser:"/user/userAdd"
-	}
-};
 
-axios.defaults.baseURL = "/edu";
-axios.defaults.headers.post["Content-Type"] = 'application/json';
-const $http = function({
-	url="",
-	method="post",
-	data={},
-	headers={},
-	responseType="json",
-	timeout=10000,
-	params={}
-}){
-	if(method.toLocaleLowerCase === "get"){
-		params = data;
-	}
-	if(headers["Content-Type"] === "multipart/form-data"){
-		const formData = new FormData();
-		Object.entries(data).forEach(item=>{
-			formData.append(item[0],item[1]);
-		});
-		data = formData;
-	}
-	return new Promise((resolve, reject)=>{
-		const close = createSpin();
-		axios({
-			url,
-			method,
-			data,
-			params,
-			timeout,
-			headers,
-			responseType
-		}).then(response=>{
-			const {data:resData} = response;
-			const {meta={},data={}} = resData;
-			const {code,msg} = meta;
-			if(code === "200" || code === 200){
-				resolve(data);
-			}else{
-				reject(msg || "接口异常！");
-			}
-		}).catch(error=>{
-			reject(error.message);
-		}).then(()=>{
-			close();
-		});
-	});
-};
-const createSpin = function(){
-	const wrapper = document.createElement("div");
-	wrapper.className = "mask-wrapper";
-	document.body.append(wrapper);
-	ReactDOM.render(<Spin size={"large"} wrapperClassName={"test"} tip={"数据交互中~"}/>,wrapper);
-	return function(){
-		wrapper.remove();
 	}
 };
 

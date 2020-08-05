@@ -3,13 +3,19 @@ import {Route,Redirect,Switch} from "react-router-dom";
 import configs from "./config";
 
 export default class extends React.Component{
+	shouldComponentUpdate() {
+		return false;
+	}
 	render() {
 		return (
 			<div>
 				<Switch>
 					{
 						this.buildRenderData().map(item=>
-							<Route key={item.path} path={item.path} exact={true} component={item.component || (()=>item.path)} />
+							<Route key={item.path} path={item.path} exact={true} component={(props)=>{
+								const C = item.component || (()=>item.path);
+								return <C {...props} title={item.label}/>
+							}} />
 						)
 					}
 					<Redirect exact={true} to={configs.defaultRoute}/>

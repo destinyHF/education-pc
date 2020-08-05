@@ -7,43 +7,17 @@ export function getUserList(data={}){
         url:API.user.getUserList,
         method:"get",
         data,
-    }).catch((err)=>{
-        return{
-            "page": {
-                "currentPage": 1,
-                "pageSize": 2,
-                "totalPage": 1,
-                "totalSize": 2
-            },
-            "data": [
-                {
-                    "userId": 1,
-                    "createTime": 1551636031000,
-                    "email": null,
-                    "expiredDate": null,
-                    "name": "管理员",
-                    "password": "ee04f47fa402788c61f3205e44fbe472",
-                    "salt": "debdd418b73c75b63f5b1a709cbff7ab",
-                    "state": true,
-                    "userName": "admin",
-                    "credentialsSalt": "admindebdd418b73c75b63f5b1a709cbff7ab"
-                },
-                {
-                    "userId": 3,
-                    "createTime": 1591020175000,
-                    "email": null,
-                    "expiredDate": null,
-                    "name": "用户1",
-                    "password": "60b38010552ff6d73a109ff3d2ef69fa",
-                    "salt": "cedde6a3bfe45e9070af1b2ed5b9c88e",
-                    "state": true,
-                    "userName": "user1",
-                    "credentialsSalt": "user1cedde6a3bfe45e9070af1b2ed5b9c88e"
-                }
-            ]
-        }
     })
 }
+/*切换用户状态*/
+export function switchUserStatus(data={}){
+    return $http({
+        url:API.user.switchUserStatus,
+        method:"get",
+        data,
+    })
+}
+
 
 /*获取角色列表*/
 export function getRoleList(data={}){
@@ -77,6 +51,22 @@ export function createUser(data={}){
         url:API.user.createUser,
         method:"post",
         data,
+    });
+}
+/*修改用户*/
+export function updateUser(data={}){
+    return $http({
+        url:API.user.updateUser,
+        method:"post",
+        data,
+    });
+}
+/*删除用户*/
+export function deleteUser(data={}){
+    return $http({
+        url:API.user.deleteUser,
+        method:"delete",
+        params:data,
     });
 }
 
