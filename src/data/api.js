@@ -2,7 +2,6 @@ import $http from "./$http";
 
 const API = {
 	common:{
-		autoLogin:"/auth/autoLogin",//自动登录
 		login:"/login",//登录
 		logout:"/logout",//登出
 		getArticleDetail:"/getArticleDetail",//获取文章详情
@@ -27,8 +26,11 @@ const API = {
 		createUser:"/user/userAdd",//创建用户
 		updateUser:"/user/userUpdate",//修改用户
 		deleteUser:"/user/userDel",//删除用户
-		getRoleList:"/sys/role/roleList",
-
+		getRoleList:"/sys/role/roleList",//获取角色列表
+	},
+	resource:{
+		upload:"/img/upload",
+		qiniuDomain:"http://upload-z2.qiniup.com"
 	}
 };
 

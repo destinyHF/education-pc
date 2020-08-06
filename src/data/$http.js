@@ -10,6 +10,12 @@ axios.defaults.timeout = 10000;
 axios.defaults.responseType = "json";
 axios.interceptors.response.use((response)=>{
     const {data:resData} = response;
+    if(Object.keys(resData).includes("hash")){
+        return Promise.resolve([{
+            name:resData.hash,
+            url:"http://qems0mspk.bkt.clouddn.com//"+resData.hash
+        }]);
+    }
     const {meta={},data={}} = resData;
     const {code,msg} = meta;
     if(code === "200" || code === 200){
@@ -39,6 +45,7 @@ export default ({
     data={},
     headers={},
     responseType="json",
+    onUploadProgress=()=>{}
 })=>{
     const close = createSpin();
     if(method.toLowerCase() === "get"){
@@ -50,6 +57,7 @@ export default ({
         params,
         data,
         headers,
-        responseType
+        responseType,
+        onUploadProgress
     }).finally(close);
 }

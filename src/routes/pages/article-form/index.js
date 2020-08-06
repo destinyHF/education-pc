@@ -6,7 +6,7 @@ import style from "./index.module.css";
 import WangEditor from "./wang-editor";
 import {parseParams} from "../../../utility/common";
 import {getArticleDetail,createArticle,updateArticle} from "../../../data/request";
-
+import CoverModel from "./coms/cover-model";
 
 const layout = {
 	labelCol:{span:3},
@@ -28,18 +28,18 @@ export default class extends React.Component{
 		const {detailData,handleType} = this.state;
 		return(
 			<Form ref={this.formRef} {...layout} className={style.form}>
-				<Form.Item
-					label={"类型"}
-					name={"articleType"}
-					rules={[
-						{required:true,message:"必填！"}
-					]}
-				>
-					<Radio.Group>
-						<Radio value={"normal"}>普通文章</Radio>
-						<Radio value={"video"}>视频文章</Radio>
-					</Radio.Group>
-				</Form.Item>
+				{/*<Form.Item*/}
+				{/*	label={"类型"}*/}
+				{/*	name={"articleType"}*/}
+				{/*	rules={[*/}
+				{/*		{required:true,message:"必填！"}*/}
+				{/*	]}*/}
+				{/*>*/}
+				{/*	<Radio.Group>*/}
+				{/*		<Radio value={"normal"}>普通文章</Radio>*/}
+				{/*		<Radio value={"video"}>视频文章</Radio>*/}
+				{/*	</Radio.Group>*/}
+				{/*</Form.Item>*/}
 				<Form.Item
 					label={"标题"}
 					name={"title"}
@@ -51,12 +51,21 @@ export default class extends React.Component{
 				</Form.Item>
 				<Form.Item
 					label={"内容"}
-					name={"content"}
+					name={"text"}
 					rules={[
 						{required:true,message:"请输入内容！"}
 					]}
 				>
 					<WangEditor handleType={handleType}/>
+				</Form.Item>
+				<Form.Item
+					label={"封面模式"}
+					name={"coverModel"}
+					rules={[
+						{required:true,message:"必填！"}
+					]}
+				>
+					<CoverModel/>
 				</Form.Item>
 				<Form.Item
 					label={"来源"}
@@ -108,6 +117,8 @@ export default class extends React.Component{
 	};
 	submit=(type)=>{
 		this.formRef.current.validateFields().then(values=>{
+			console.log(values);
+			return;
 			const {articleId} = this.state;
 			const reqData = this.buildReqData(values);
 			const next = function(articleId,type){
