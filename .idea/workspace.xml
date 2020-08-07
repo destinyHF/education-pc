@@ -20,16 +20,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d0123ae-3655-4142-8bde-9655d9806e02" name="Default Changelist" comment="commit">
-      <change afterPath="$PROJECT_DIR$/src/components/e-upload/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/pages/article-form/coms/cover-model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/md/专题.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/md/文章.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/pages/subject/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/pages/subject/modal/update.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/pages/subject/request.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/craco.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/craco.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/e-upload/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/e-upload/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/thumbnail/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/thumbnail/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/thumbnail/index.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/thumbnail/index.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/$http.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/$http.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/article-form/coms/cover-model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/article-form/coms/cover-model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/pages/article-form/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/article-form/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/article-form/wang-editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/article-form/wang-editor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/img-material/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/img-material/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/img-material/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/img-material/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/published/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/published/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/user-manage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/user-manage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/user-manage/modal/update.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/user-manage/modal/update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/user-manage/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/user-manage/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/video-material/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/video-material/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/pages/video-material/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pages/video-material/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +60,8 @@
       <list>
         <option value="Less File" />
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -68,7 +87,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../project/test/zhyz/zhyz-admin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/md" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -80,40 +99,36 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="C:\houfei\software\WebStorm 2020.1.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="C:\houfei\software\webstorm\WebStorm 2020.1.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../test/zhyz/zhyz-admin/src/structure/layout/aside.module.css" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\houfei\my-project\education-pc\md" />
       <recent name="C:\houfei\my-project\education-pc" />
       <recent name="C:\houfei-file\my-project\education-pc" />
       <recent name="D:\myProject\education-pc\src\routes\pages\video-material" />
       <recent name="D:\myProject\education-pc\src\static\ue" />
-      <recent name="D:\myProject\education-pc\src\static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\houfei\my-project\education-pc\src\routes\pages\subject\modal" />
+      <recent name="C:\houfei\my-project\education-pc\src" />
       <recent name="C:\houfei\my-project\education-pc\src\routes\pages\article-form\coms" />
       <recent name="C:\houfei\my-project\education-pc" />
-      <recent name="C:\houfei\my-project\education-pc\src" />
       <recent name="C:\houfei\my-project\education-pc\src\utility" />
-      <recent name="C:\houfei\my-project\education-pc\src\structure" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="Node.js.test.js">
     <configuration name="client.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="client.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration name="config.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/config.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration name="server.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="server.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="build" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
+    <configuration name="test.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -128,10 +143,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.test.js" />
+        <item itemvalue="Node.js.config.js" />
         <item itemvalue="npm.start" />
         <item itemvalue="Node.js.client.js" />
         <item itemvalue="Node.js.server.js" />
-        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -314,7 +330,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596639843793</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="commit">
+      <created>1596709745361</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1596709745361</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -364,25 +387,25 @@
     </state>
     <state x="592" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1596704868376" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591068900554" />
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1596612813867">
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1596763117266">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596612813867" />
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596763117266" />
     <state width="1899" height="330" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591167820505" />
-    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1596612813866">
+    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1596763117266">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596612813866" />
+    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596763117266" />
     <state width="1899" height="330" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591167820505" />
-    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1596612813866">
+    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1596763117266">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596612813866" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596763117266" />
     <state width="1899" height="330" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591167820504" />
-    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1596612813866">
+    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1596763117266">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596612813866" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596763117266" />
     <state width="1899" height="330" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591167820505" />
     <state x="502" y="31" key="RollbackChangesDialog" timestamp="1591669343017">
       <screen x="0" y="0" width="1536" height="824" />
@@ -392,15 +415,15 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="150" y="36" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1591665714992" />
-    <state x="442" y="200" key="Vcs.Push.Dialog.v2" timestamp="1596679207452">
+    <state x="442" y="200" key="Vcs.Push.Dialog.v2" timestamp="1596709749600">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596679207452" />
+    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596709749600" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591090846542" />
-    <state x="530" y="20" width="570" height="804" key="find.popup" timestamp="1596705206829">
+    <state x="530" y="20" width="570" height="804" key="find.popup" timestamp="1596785266738">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="530" y="20" width="570" height="804" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1596705206829" />
+    <state x="530" y="20" width="570" height="804" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1596785266738" />
     <state x="662" y="252" width="596" height="536" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591065555394" />
     <state x="461" y="199" key="git4idea.merge.GitPullDialog" timestamp="1596679211344">
       <screen x="0" y="0" width="1536" height="824" />

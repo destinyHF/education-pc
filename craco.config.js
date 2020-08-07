@@ -8,6 +8,19 @@ const proxyIP = "http://221.237.108.131:81";
 module.exports = {
   plugins:[
     {
+      plugin: CracoAlias,
+      options: {
+        source: "options",
+        baseUrl: "./src",
+        aliases: {
+          "@components": "./components",
+          "@data": "./data",
+          "@routes": "./routes",
+          "@utility": "./utility",
+        }
+      }
+    },
+    {
       plugin: CracoAntDesignPlugin,
       options: {
         customizeThemeLessPath: path.join(

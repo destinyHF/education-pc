@@ -1,7 +1,7 @@
 import React from "react";
-import {Radio,Row,Col,Button} from "antd";
-import rndm from "rndm";
-import EUpload from "../../../../components/e-upload";
+import {Radio,Row,Col,Tooltip} from "antd";
+import {QuestionCircleOutlined} from "@ant-design/icons";
+import EUpload from "@components/e-upload";
 
 export default class extends React.Component{
     render(){
@@ -14,6 +14,11 @@ export default class extends React.Component{
                         <Radio value={"multiplePic"}>多图</Radio>
                         <Radio value={"video"}>视频</Radio>
                     </Radio.Group>
+                    <span style={{fontSize:"13px"}} className={"text-primary"}>
+                        <QuestionCircleOutlined /> 封面模式只会影响移动端新闻列表的展示方式；视频建议上传mp4格式，以避免浏览器无法播放
+                    </span>
+
+
                 </Col>
                 <Col span={24} style={{marginBottom:"10px"}}>
                     {
@@ -23,27 +28,17 @@ export default class extends React.Component{
                         type === "multiplePic" && <EUpload value={urls} onChange={this.onSuccess} listType={"picture-card"} size={3}/>
                     }
                     {
-                        type === "video" && <EUpload value={urls} accept={"video"} size={1}/>
+                        type === "video" && <EUpload value={urls} onChange={this.onSuccess} accept={"video"} size={1}/>
                     }
                 </Col>
             </Row>
         )
     }
     parsePropsValue=()=>{
-        const {type,urls} = JSON.parse(this.props.value || `{"type":"multiplePic","urls":[]}`);
+        const {type,urls=[]} = JSON.parse(this.props.value || `{"type":"multiplePic","urls":[]}`);
         return{
             type,
-            urls:urls.map(item=>{
-                return {
-                    uid:"resource_"+rndm(10),
-                    thumbUrl:item,
-                    status:"done",
-                    response:[{
-                        name:item,
-                        url:item
-                    }]
-                }
-            })
+            urls:JSON.stringify(urls)
         }
     }
     onTypeChange=(e)=>{
@@ -56,9 +51,7 @@ export default class extends React.Component{
         const {type} = this.parsePropsValue();
         this.props.onChange(JSON.stringify({
             type,
-            urls:urls.map(item=>{
-                return item.response[0].url
-            })
+            urls:JSON.parse(urls)
         }))
     }
 }

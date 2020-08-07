@@ -40,11 +40,8 @@ export function getArticleDetail(data={}){
 export function createArticle(data={}){
 	return $http({
 		url:API.common.createArticle,
+		method:"post",
 		data,
-		testData:{
-			code:"success",
-			data:{}
-		}
 	})
 }
 /*编辑文章*/

@@ -1,9 +1,9 @@
 import React from "react";
 import {Tooltip,Modal,message} from "antd";
 import {EditOutlined,DeleteOutlined} from "@ant-design/icons";
-import ETable from "../../../components/e-table";
-import Thumbnail from "../../../components/thumbnail";
-import {getImgMaterial,createImageMaterial,deleteImageMaterial,updateImageMaterial} from "../../../data/request";
+import ETable from "@components/e-table";
+import Thumbnail from "@components/thumbnail";
+import {getImgMaterial,createImageMaterial,deleteImageMaterial,updateImageMaterial} from "@data/request";
 import MaterialForm from "./form";
 
 const conditions = [

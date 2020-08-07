@@ -2,6 +2,7 @@ import axios from "axios";
 import ReactDOM from "react-dom";
 import {Spin} from "antd";
 import React from "react";
+import {qiniuResourceHost} from "../config";
 
 axios.defaults.baseURL = "/edu";
 axios.defaults.headers.post["Content-Type"] = 'application/json';
@@ -13,7 +14,7 @@ axios.interceptors.response.use((response)=>{
     if(Object.keys(resData).includes("hash")){
         return Promise.resolve([{
             name:resData.hash,
-            url:"http://qems0mspk.bkt.clouddn.com//"+resData.hash
+            url:qiniuResourceHost+resData.hash
         }]);
     }
     const {meta={},data={}} = resData;
@@ -24,6 +25,9 @@ axios.interceptors.response.use((response)=>{
         return Promise.reject(msg);
     }
 },error=>{
+    if(!error.response){
+        return Promise.reject("请求失败！");
+    }
     const {status,statusText} = error.response;
     return Promise.reject(JSON.stringify({status,statusText}));
 });
@@ -45,7 +49,8 @@ export default ({
     data={},
     headers={},
     responseType="json",
-    onUploadProgress=()=>{}
+    onUploadProgress=()=>{},
+    timeout
 })=>{
     const close = createSpin();
     if(method.toLowerCase() === "get"){
@@ -58,6 +63,7 @@ export default ({
         data,
         headers,
         responseType,
-        onUploadProgress
+        onUploadProgress,
+        timeout
     }).finally(close);
 }

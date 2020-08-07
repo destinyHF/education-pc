@@ -4,8 +4,8 @@ import style from "./index.module.css";
 // import UEditor from "./editor";
 // import DraftEditor from "./draft-editor";
 import WangEditor from "./wang-editor";
-import {parseParams} from "../../../utility/common";
-import {getArticleDetail,createArticle,updateArticle} from "../../../data/request";
+import {parseParams} from "@utility/common";
+import {getArticleDetail,createArticle,updateArticle} from "@data/request";
 import CoverModel from "./coms/cover-model";
 
 const layout = {
@@ -60,9 +60,27 @@ export default class extends React.Component{
 				</Form.Item>
 				<Form.Item
 					label={"封面模式"}
-					name={"coverModel"}
+					name={"url"}
 					rules={[
-						{required:true,message:"必填！"}
+						{required:true,message:"必填！"},
+						{
+							validator(rule,value){
+								if(!value){
+									return Promise.reject();
+								}
+								try{
+									const {type,urls} = JSON.parse(value);
+									if(!urls.length){
+										return Promise.reject("必填！");
+									}else if(type === "multiplePic" && urls.length === 2){
+										return Promise.reject("多图模式，需上传1或3张图片！");
+									}
+									return Promise.resolve();
+								}catch (e) {
+									return Promise.reject("数据异常！");
+								}
+							}
+						}
 					]}
 				>
 					<CoverModel/>
@@ -89,8 +107,8 @@ export default class extends React.Component{
 				</Form.Item>
 				<Row className={style.btnWrapper}>
 					<Col offset={3} span={18}>
-						<Button size={"large"} type={"primary"} onClick={()=>this.submit("1")}>保存并发布</Button>
-						<Button size={"large"} type={"warning"} style={{marginLeft:"15px"}} onClick={()=>this.submit("2")}>保存至草稿箱</Button>
+						<Button size={"large"} type={"primary"} onClick={()=>this.submit({draft:false})}>保存并发布</Button>
+						<Button size={"large"} type={"warning"} style={{marginLeft:"15px"}} onClick={()=>this.submit({draft:true})}>保存至草稿箱</Button>
 					</Col>
 				</Row>
 			</Form>
@@ -100,7 +118,7 @@ export default class extends React.Component{
 		this.getDetailData();
 	}
 	getDetailData=()=>{ //获取详情信息
-		const {handleType="",articleId=""} = this.state;;
+		const {handleType="",articleId=""} = this.state;
 		if(handleType !== "edit" || !articleId){
 			return false;
 		}
@@ -115,14 +133,17 @@ export default class extends React.Component{
 	buildReqData=(values)=>{
 		return values;
 	};
-	submit=(type)=>{
+	submit=(extraData={})=>{
 		this.formRef.current.validateFields().then(values=>{
-			console.log(values);
-			return;
 			const {articleId} = this.state;
 			const reqData = this.buildReqData(values);
-			const next = function(articleId,type){
-				const data = {...reqData,id:articleId,saveType:type};
+			const next = function(){
+				const data = {
+					...reqData,
+					id:articleId,
+					...extraData,
+					type:"TEXT"
+				};
 				if(articleId){
 					return updateArticle(data);
 				}else{
@@ -130,9 +151,9 @@ export default class extends React.Component{
 					return createArticle(data);
 				}
 			};
-			next(articleId,type).then(()=>{
+			next().then(()=>{
 				message.success("操作成功！",1.5,()=>{
-					const route = type === "1"?"published":"drafts";
+					const route = !extraData.draft?"published":"drafts";
 					localStorage.clear();
 					this.props.history.push(route);
 				});

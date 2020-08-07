@@ -1,27 +1,28 @@
 import React from "react";
 import {Upload,Button,message,Modal} from "antd";
 import {UploadOutlined } from "@ant-design/icons";
-import {API,$http} from "../../data/api";
-const token = "2qjcyL9Hy-A7a3uFWvZ862kbg22Nyth_cwY9bJk3:jrIZ0dUAdrPccXfVhTTsHhXpfp0=:eyJzY29wZSI6ImFzaGVuLWVkdSIsImRlYWRsaW5lIjoxNTk3MzA1NTg3fQ==";
-
+import {API,$http} from "@data/api";
+import {qiniuToken,qiniuUploadHost,resourceHost} from "../../config";
+import rndm from "rndm";
 
 export default class extends React.Component{
     static defaultProps = {
-        action:API.resource.qiniuDomain,
+        action:qiniuUploadHost,
+        // action:API.resource.upload,
         listType:"text",
         accept:"image",
-        onSuccess:(e)=>{console.log("??",e)},
+        onSuccess:()=>{},
         onError:()=>{},
         size:1
     }
     constructor(props) {
         super(props);
         this.state = {
-            fileList:props.value
+            fileList:this.paresPropsValue()
         }
     }
     render(){
-        const {action,listType,size} = this.props;
+        const {action,listType} = this.props;
         const {fileList} = this.state;
         return (
             <Upload
@@ -33,16 +34,30 @@ export default class extends React.Component{
                 customRequest={customRequest}
                 onChange={this.onChange}
                 onPreview={this.onPreview}
+                onRemove={this.onRemove}
                 accept={this.getAccept()}
                 fileList={fileList}
-                data={{token:token}}
-                disabled={fileList.length>=size}
+                data={{token:qiniuToken}}
             >
-                <Button size={"small"} disabled={fileList.length>=size}>
+                <Button size={"small"}>
                     <UploadOutlined/>本地上传
                 </Button>
             </Upload>
         )
+    }
+    paresPropsValue=()=>{
+        const value = this.props.value || "[]";
+        return JSON.parse(value).map(item=>{
+            return {
+                uid:"resource_"+rndm(10),
+                thumbUrl:item,
+                status:"done",
+                response:[{
+                    name:item,
+                    url:item
+                }]
+            }
+        })
     }
     getAccept=()=>{
         const {accept} = this.props;
@@ -56,7 +71,12 @@ export default class extends React.Component{
         }
     }
     beforeUpload=(file)=>{
-        const {accept} = this.props;
+        const {accept,size} = this.props;
+        const {fileList} = this.state;
+        if(fileList.length>=size){
+            message.warn(`超过个数限制！`,2.5);
+            return Promise.reject();
+        }
         if(file.type.substring(0,5) !== accept){
             message.warn(`请上传${accept}文件！`);
             return Promise.reject();
@@ -75,11 +95,19 @@ export default class extends React.Component{
         this.setState({fileList})
         if(file.status === "error"){
             message.error(file.error,2.5);
+            const newFileList = fileList.filter(item=>item.status==="done")
             this.props.onError();
-            this.props.onChange(fileList)
+            this.props.onChange(JSON.stringify(newFileList.map(item=>item.response.url)))
+            this.setState({
+                fileList:newFileList
+            });
         }
         if(file.status === "done"){
-            this.props.onChange(fileList)
+            const newFileList = fileList.filter(item=>item.status==="done")
+            this.props.onChange(JSON.stringify(newFileList.map(item=>item.response.url)))
+            this.setState({
+                fileList:newFileList
+            });
         }
     }
     onPreview=(file)=>{
@@ -87,10 +115,16 @@ export default class extends React.Component{
             Modal.info({
                 title:"预览",
                 width:600,
-                content:<div><img src={file.response[0].url} style={{width:"100%"}}/></div>,
+                content:<div><img src={file.response.url} style={{width:"100%"}}/></div>,
                 okText:"关闭"
             })
         }
+    }
+    onRemove=(file)=>{
+        const {fileList} = this.state;
+        const newFileList = fileList.filter(item=>item.uid !== file.uid);
+        this.setState({fileList:newFileList});
+        this.props.onChange(newFileList);
     }
 }
 const customRequest = function({
@@ -112,10 +146,17 @@ const customRequest = function({
         url:action,
         method:"post",
         data:formData,
+        timeout:1000*60*5,
         onUploadProgress: ({ total, loaded }) => {
             onProgress({ percent: Math.round(loaded / total * 100).toFixed(2) }, file);
         },
-    }).then(onSuccess).catch(onError);
+    }).then(([res])=>{
+        const url = res.url.indexOf("http://") === 0 ? res.url : resourceHost+res.url;
+        return onSuccess({
+            ...res,
+            url
+        })
+    }).catch(onError);
 }
 const getImageInfo = function(file){
     return new Promise((resolve, reject)=>{

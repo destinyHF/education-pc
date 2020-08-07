@@ -4,10 +4,10 @@
 import React from "react";
 import {Tooltip,message,Modal} from "antd";
 import {EditOutlined,DeleteOutlined,LockOutlined,QuestionCircleOutlined,UnlockOutlined} from "@ant-design/icons";
-import ETable from "../../../components/e-table";
+import ETable from "@components/e-table";
 import {getUserList,createUser,switchUserStatus,updateUser,deleteUser} from "./request";
 import moment from "moment";
-import StatusText from "../../../components/status-text";
+import StatusText from "@components/status-text";
 import UpdateForm from "./modal/update";
 
 const conditions = [

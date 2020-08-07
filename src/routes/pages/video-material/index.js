@@ -1,8 +1,8 @@
 import React from "react";
 import {Tooltip,Modal,message} from "antd";
 import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
-import ETable from "../../../components/e-table";
-import {getVideoMaterial,createVideoMaterial,deleteVideoMaterial,updateVideoMaterial} from "../../../data/request";
+import ETable from "@components/e-table";
+import {getVideoMaterial,createVideoMaterial,deleteVideoMaterial,updateVideoMaterial} from "@data/request";
 import MaterialForm from "./form";
 
 const conditions = [

@@ -19,17 +19,20 @@ export default class extends React.Component{
         const {ruleList} = this.state;
         return(
             <Form ref={formRef} initialValues={initialValues} {...layout}>
-                <Form.Item label={"昵称"} name={"name"} rules={[
-                    {required:true,message:"必填！"}
-                ]}>
-                    <Input autoComplete={"off"} maxLength={10}/>
+                <Form.Item
+                    label={"昵称"}
+                    name={"name"} rules={[
+                        {required:true,message:"必填！"}
+                    ]}
+                >
+                    <Input autoComplete={"off"} maxLength={10} placeholder={"请输入昵称，10个字符以内"}/>
                 </Form.Item>
                 <Form.Item label={"用户名"} name={"userName"} rules={[
                     {required:true,message:"必填！"},
                     {min:5,message:"不少于5个字符！"},
                     {max:20,message:"不多于20个字符！"}
                 ]}>
-                    <Input autoComplete={"off"} maxLength={20}/>
+                    <Input autoComplete={"off"} maxLength={20} placeholder={"请输入用户名，5~20个字符"}/>
                 </Form.Item>
                 <Form.Item label="密码" name="password" hasFeedback
                     rules={[
@@ -38,7 +41,7 @@ export default class extends React.Component{
                         {max:20,message:"不多于20个字符！"}
                     ]}
                 >
-                    <Input.Password autoComplete={"new-password"}/>
+                    <Input.Password autoComplete={"new-password"} placeholder={"请输入密码，8~20个字符"}/>
                 </Form.Item>
                 <Form.Item label="确认密码" name="confirm" dependencies={["password"]} hasFeedback
                     rules={[
@@ -64,7 +67,7 @@ export default class extends React.Component{
                         {type:"email", message: "邮箱格式错误！"},
                     ]}
                 >
-                    <Input autoComplete={"off"} maxLength={30}/>
+                    <Input autoComplete={"off"} maxLength={30} placeholder={"请输入邮箱"}/>
                 </Form.Item>
                 <Form.Item
                     label="角色"

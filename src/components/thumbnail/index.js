@@ -16,7 +16,6 @@ export default class extends React.Component{
 		}
 		Modal.info({
 			title:"预览",
-			icon:"none",
 			width:600,
 			content:<Img src={src}/>,
 			okText:"关闭"

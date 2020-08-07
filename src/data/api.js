@@ -4,8 +4,10 @@ const API = {
 	common:{
 		login:"/login",//登录
 		logout:"/logout",//登出
+		createArticle:"/content/add",//创建文章
+
 		getArticleDetail:"/getArticleDetail",//获取文章详情
-		createArticle:"/createArticle",//创建文章
+
 		updateArticle:"/updateArticle",//编辑文章
 		getPublishedArticle:"/getPublishedArticle",//获取已发布文章
 		uploadFile:"/uploadFile",//上传文件
@@ -30,7 +32,14 @@ const API = {
 	},
 	resource:{
 		upload:"/img/upload",
-		qiniuDomain:"http://upload-z2.qiniup.com"
+	},
+	subject:{
+		getSubjectList:"/topic/listTopicPage",
+		addSubject:"/topic/createTopic",
+		updateSubject:"/topic/updateTopic",
+		enableSubject:"/topic/onlineTopic",
+		disableSubject:"/topic/offlineTopic",
+		deleteSubject:"/topic/delTopic"
 	}
 };
 

@@ -1,8 +1,8 @@
 import React from "react";
 import {Tooltip} from "antd";
 import {EditOutlined,DeleteOutlined} from "@ant-design/icons";
-import ETable from "../../../components/e-table";
-import {getPublishedArticle} from "../../../data/request";
+import ETable from "@components/e-table";
+import {getPublishedArticle} from "@data/request";
 
 const conditions = [{
 	label:"标题",type:"input",key:"title"

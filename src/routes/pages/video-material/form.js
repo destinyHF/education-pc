@@ -1,7 +1,7 @@
 import React from "react";
 import {Form,Button,Row,Col,message,Input} from "antd";
 import {CloudUploadOutlined} from "@ant-design/icons";
-import {uploadFile} from "../../../data/request";
+import {uploadFile} from "@data/request";
 import rndm from "rndm";
 
 const layout = {

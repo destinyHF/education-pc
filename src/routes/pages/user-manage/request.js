@@ -1,5 +1,5 @@
-import {API} from "../../../data/api";
-import $http from "../../../data/$http";
+import {API} from "@data/api";
+import $http from "@data/$http";
 
 /*获取用户列表*/
 export function getUserList(data={}){

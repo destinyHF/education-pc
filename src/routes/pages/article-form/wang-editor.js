@@ -3,7 +3,7 @@ import WEditor from "wangeditor";
 import {PictureOutlined} from "@ant-design/icons";
 import {Button} from "antd";
 import style from "./wang-editor.module.css";
-import Upload from "../../../components/upload";
+import Upload from "@components/upload";
 
 export default class extends React.Component{
     constructor(props) {
@@ -25,6 +25,7 @@ export default class extends React.Component{
         this.initial();
     }
     initial=()=>{
+        const {onChange} = this.props;
         this.instance = new WEditor(`#${this.toolbarId}`,`#${this.containerId}`);
         this.instance.customConfig.menus = [
             'head',  // 标题
@@ -47,6 +48,9 @@ export default class extends React.Component{
             'undo',  // 撤销
             'redo'  // 重复
         ];
+        this.instance.customConfig.onchange = function (html) {
+            onChange(html)
+        }
         this.instance.create();
     }
     click=()=>{
