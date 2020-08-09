@@ -5,8 +5,10 @@ import style from "./index.module.css";
 // import DraftEditor from "./draft-editor";
 import WangEditor from "./wang-editor";
 import {parseParams} from "@utility/common";
-import {getArticleDetail,createArticle,updateArticle} from "@data/request";
-import CoverModel from "./coms/cover-model";
+import {getArticleDetail} from "../published/request";
+import {createArticle,updateArticle} from "./request";
+import CoverModel from "./modal/cover-model";
+import RelateSubject from "./modal/relate-subject";
 
 const layout = {
 	labelCol:{span:3},
@@ -21,11 +23,11 @@ export default class extends React.Component{
 			handleType:handleType,
 			articleId:articleId,
 			detailData:{}
-		}
+		};
 		this.formRef = React.createRef();
 	}
 	render(){
-		const {detailData,handleType} = this.state;
+		const {handleType,articleId} = this.state;
 		return(
 			<Form ref={this.formRef} {...layout} className={style.form}>
 				{/*<Form.Item*/}
@@ -57,6 +59,12 @@ export default class extends React.Component{
 					]}
 				>
 					<WangEditor handleType={handleType}/>
+				</Form.Item>
+				<Form.Item
+					label={"关联专题"}
+					name={"topicId"}
+				>
+					<RelateSubject articleId={articleId}/>
 				</Form.Item>
 				<Form.Item
 					label={"封面模式"}
@@ -119,13 +127,22 @@ export default class extends React.Component{
 	}
 	getDetailData=()=>{ //获取详情信息
 		const {handleType="",articleId=""} = this.state;
+		const {setFieldsValue} = this.formRef.current;
 		if(handleType !== "edit" || !articleId){
 			return false;
 		}
-		getArticleDetail({id:articleId}).then(({data})=>{
+		getArticleDetail({id:articleId}).then(detailData=>{
 			this.setState({
-				detailData:data
+				detailData
 			});
+			setFieldsValue({
+				title:detailData.title,
+				text:detailData.text,
+				url:detailData.url,
+				source:detailData.source,
+				editor:detailData.editor
+			})
+
 		}).catch(error=>{
 			message.error(error,2.5);
 		});

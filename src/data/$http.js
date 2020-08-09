@@ -1,6 +1,6 @@
 import axios from "axios";
 import ReactDOM from "react-dom";
-import {Spin} from "antd";
+import {Spin,message} from "antd";
 import React from "react";
 import {qiniuResourceHost} from "../config";
 
@@ -21,6 +21,11 @@ axios.interceptors.response.use((response)=>{
     const {code,msg} = meta;
     if(code === "200" || code === 200){
         return Promise.resolve(data);
+    }else if(code === "401" || code === 401){
+        sessionStorage.clear();
+        message.warning("登录已过期，请重新登录！",2.5,()=>{
+            window.location.reload();
+        });
     }else{
         return Promise.reject(msg);
     }

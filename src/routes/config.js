@@ -1,6 +1,7 @@
 import React from "react";
 import {PicLeftOutlined,UnorderedListOutlined,UsergroupAddOutlined} from "@ant-design/icons"
 import Published from "./pages/published";
+import Drafts from "./pages/drafts";
 import ArticleForm from "./pages/article-form";
 import ImgMaterial from "./pages/img-material";
 import VideoMaterial from "./pages/video-material";
@@ -20,7 +21,7 @@ const configs = [
 		icon:<PicLeftOutlined />,
 		children:[{
 			label:"新建文章",
-			path:"/articleForm",
+			path:"/createArticle",
 			component:ArticleForm
 		},{
 			label:"已发布",
@@ -29,6 +30,7 @@ const configs = [
 		},{
 			label:"草稿箱",
 			path:"/drafts",
+			component:Drafts
 		}],
 	},{
 		label: "专题管理",
@@ -59,7 +61,15 @@ const configs = [
 		component:UserManage
 	}
 ];
-const otherConfigs = [];
+const otherConfigs = [
+	{
+		label: "编辑文章",
+		key:"updateArticle",
+		path:"/updateArticle",
+		icon:<UnorderedListOutlined />,
+		component: ArticleForm
+	}
+];
 
 configs.defaultRoute = defaultRoute;
 configs.otherConfigs = otherConfigs;

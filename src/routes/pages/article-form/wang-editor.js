@@ -24,6 +24,13 @@ export default class extends React.Component{
     componentDidMount() {
         this.initial();
     }
+    shouldComponentUpdate(nextProps) {
+        return this.props.value !== nextProps.value;
+    }
+    componentDidUpdate(){
+        console.log("update");
+        this.instance.txt.html(this.props.value);
+    }
     initial=()=>{
         const {onChange} = this.props;
         this.instance = new WEditor(`#${this.toolbarId}`,`#${this.containerId}`);
@@ -50,7 +57,8 @@ export default class extends React.Component{
         ];
         this.instance.customConfig.onchange = function (html) {
             onChange(html)
-        }
+        };
+        this.instance.customConfig.zIndex = 100;
         this.instance.create();
     }
     click=()=>{

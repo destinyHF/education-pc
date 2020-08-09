@@ -1,18 +1,18 @@
 import React from "react";
-import {Tooltip,Modal,message} from "antd";
-import {EditOutlined,UndoOutlined} from "@ant-design/icons";
+import {Tooltip,message} from "antd";
+import {EditOutlined,DeleteOutlined,FileDoneOutlined} from "@ant-design/icons";
 import ETable from "@components/e-table";
 import {parseObject} from "@utility/common";
-import {getArticleList} from "./request";
+import {getArticleList} from "../published/request";
 import {updateArticle} from "../article-form/request";
 import moment from "moment";
-import CoverModel from "./modal/cover-model";
+import CoverModel from "../published/modal/cover-model";
 
 const conditions = [{
 	label:"标题",type:"input",key:"title"
 }];
 const handleBtn = [
-	{key:"create",name:"新建",type:"primary",relation:"none"}
+	{key:"delete",name:"删除",type:"danger",relation:"multiple"}
 ];
 
 export default class extends React.Component{
@@ -36,16 +36,19 @@ export default class extends React.Component{
 					{title:"更新时间",width:"150px",key:"updateTime",component:({data})=>data.updateTime && <span>{moment(data.updateTime).format("YYYY-MM-DD HH:mm:ss")}</span>},
 					{title:"操作",width:"100px",key:"handle",component:({data,getList})=>
 						<div>
+							<Tooltip title={"发布"} onClick={()=>this.publishArticle(data,getList)}>
+								<FileDoneOutlined className={"table-icon"} />
+							</Tooltip>
 							<Tooltip title={"编辑"} onClick={()=>this.editArticle(data)}>
 								<EditOutlined className={"table-icon"} />
 							</Tooltip>
-							<Tooltip title={"撤回"} onClick={()=>this.recycleArticle(data,getList)}>
-								<UndoOutlined className={"table-icon"}/>
+							<Tooltip title={"删除"}>
+								<DeleteOutlined className={"table-icon"}/>
 							</Tooltip>
 						</div>
 					}
 				]}
-				dataSource={data=>getArticleList({...data,draft:0})}
+				dataSource={data=>getArticleList({...data,draft:1})}
 			/>
 		)
 	}
@@ -53,12 +56,19 @@ export default class extends React.Component{
 		switch (key) {
 			case "create":
 				this.createArticle();break;
+			case "delete":
+				this.deleteArticle(selectedRows,callback);break;
 			default:
 				return;
 		}
 	};
-	createArticle=()=>{
-		this.props.history.push("createArticle");
+	publishArticle=(data,callback)=>{
+		updateArticle({id:data.id,draft:false}).then(()=>{
+			message.success("发布成功！",2.5);
+			callback();
+		}).catch(error=>{
+			message.error(error,2.5);
+		})
 	};
 	editArticle=(target)=>{
 		const params = {
@@ -67,20 +77,7 @@ export default class extends React.Component{
 		};
 		this.props.history.push("updateArticle?"+parseObject(params));
 	};
-	recycleArticle=(data,callback)=>{
-		Modal.confirm({
-			type:"waring",
-			title:"撤回文章",
-			content:"撤回文章将会保存至草稿箱，确认撤回该文章？",
-			onOk:(close)=>{
-				updateArticle({id:data.id,draft: true}).then(()=>{
-					message.success("操作成功！",1.5);
-					close();
-					callback();
-				}).catch(error=>{
-					message.error(error,2.5);
-				})
-			}
-		})
+	deleteArticle=(selectedRows,callback)=>{
+		console.log("删除",selectedRows,callback);
 	};
 }

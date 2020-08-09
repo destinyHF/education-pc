@@ -52,10 +52,12 @@ export default class extends React.Component{
                 uid:"resource_"+rndm(10),
                 thumbUrl:item,
                 status:"done",
-                response:[{
+                url:item,
+                name:item,
+                response:{
                     name:item,
                     url:item
-                }]
+                }
             }
         })
     }
@@ -111,20 +113,21 @@ export default class extends React.Component{
         }
     }
     onPreview=(file)=>{
-        if(file.type.substring(0,5) === "image"){
-            Modal.info({
-                title:"预览",
-                width:600,
-                content:<div><img src={file.response.url} style={{width:"100%"}}/></div>,
-                okText:"关闭"
-            })
-        }
+        window.open(file.response.url);
+        // if(file.type.substring(0,5) === "image"){
+        //     Modal.info({
+        //         title:"预览",
+        //         width:600,
+        //         content:<div><img src={file.response.url} style={{width:"100%"}}/></div>,
+        //         okText:"关闭"
+        //     })
+        // }
     }
     onRemove=(file)=>{
         const {fileList} = this.state;
         const newFileList = fileList.filter(item=>item.uid !== file.uid);
         this.setState({fileList:newFileList});
-        this.props.onChange(newFileList);
+        this.props.onChange(JSON.stringify(newFileList));
     }
 }
 const customRequest = function({

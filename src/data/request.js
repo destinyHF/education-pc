@@ -36,14 +36,6 @@ export function getArticleDetail(data={}){
 		}
 	})
 }
-/*新建文章*/
-export function createArticle(data={}){
-	return $http({
-		url:API.common.createArticle,
-		method:"post",
-		data,
-	})
-}
 /*编辑文章*/
 export function updateArticle(data={}){
 	return $http({
