@@ -1,12 +1,13 @@
 import React from "react";
 import {Tooltip,Modal,message} from "antd";
-import {EditOutlined,UndoOutlined} from "@ant-design/icons";
+import {EditOutlined, UndoOutlined, ExclamationCircleOutlined, BookOutlined} from "@ant-design/icons";
 import ETable from "@components/e-table";
 import {parseObject} from "@utility/common";
-import {getArticleList} from "./request";
+import {getArticleList,getArticleDetail} from "./request";
 import {updateArticle} from "../article-form/request";
 import moment from "moment";
 import CoverModel from "./modal/cover-model";
+import PreviewModal from "./modal/preview";
 
 const conditions = [{
 	label:"标题",type:"input",key:"title"
@@ -26,7 +27,7 @@ export default class extends React.Component{
 				handleCallback={this.handleCallback}
 				scrollX={1100}
 				tableColumn={[
-					{title:"标题",width:"150px",key:"title",component:({data})=><span className={"a-link"}>{data.title}</span>},
+					{title:"标题",width:"150px",key:"title",component:({data})=><span onClick={()=>this.previewArticle(data.id)} className={"a-link"}>{data.title}</span>},
 					{title:"封面模式",width:"80px",key:"url",component:CoverModel},
 					{title:"来源",width:"100px",key:"source"},
 					{title:"编辑",width:"100px",key:"editor"},
@@ -49,7 +50,7 @@ export default class extends React.Component{
 			/>
 		)
 	}
-	handleCallback=(key,selectedRowKeys,selectedRows,callback)=>{
+	handleCallback=(key)=>{
 		switch (key) {
 			case "create":
 				this.createArticle();break;
@@ -69,9 +70,9 @@ export default class extends React.Component{
 	};
 	recycleArticle=(data,callback)=>{
 		Modal.confirm({
-			type:"waring",
+			icon:<ExclamationCircleOutlined />,
 			title:"撤回文章",
-			content:"撤回文章将会保存至草稿箱，确认撤回该文章？",
+			content:"被撤回的文章将会保存至草稿箱，确认撤回该文章？",
 			onOk:(close)=>{
 				updateArticle({id:data.id,draft: true}).then(()=>{
 					message.success("操作成功！",1.5);
@@ -83,4 +84,15 @@ export default class extends React.Component{
 			}
 		})
 	};
+	previewArticle=(id)=>{
+		getArticleDetail({id}).then(response=>{
+			Modal.info({
+				icon:<BookOutlined />,
+				title:"预览",
+				width:600,
+				content:<PreviewModal data={response}/>,
+				okText:"关闭"
+			})
+		})
+	}
 }

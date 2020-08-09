@@ -1,14 +1,17 @@
 import React from "react";
-import {Upload,Button,message,Modal} from "antd";
+import {Upload,Button,message} from "antd";
 import {UploadOutlined } from "@ant-design/icons";
-import {API,$http} from "@data/api";
+import {API} from "@data/api";
 import {qiniuToken,qiniuUploadHost,resourceHost} from "../../config";
 import rndm from "rndm";
+import customRequest from "./request";
 
 export default class extends React.Component{
     static defaultProps = {
         action:qiniuUploadHost,
+        data:{token:qiniuToken},
         // action:API.resource.upload,
+        // data:{},
         listType:"text",
         accept:"image",
         onSuccess:()=>{},
@@ -22,7 +25,7 @@ export default class extends React.Component{
         }
     }
     render(){
-        const {action,listType} = this.props;
+        const {action,listType,data} = this.props;
         const {fileList} = this.state;
         return (
             <Upload
@@ -37,7 +40,7 @@ export default class extends React.Component{
                 onRemove={this.onRemove}
                 accept={this.getAccept()}
                 fileList={fileList}
-                data={{token:qiniuToken}}
+                data={data}
             >
                 <Button size={"small"}>
                     <UploadOutlined/>本地上传
@@ -84,11 +87,11 @@ export default class extends React.Component{
             return Promise.reject();
         }
         if(accept === "image" && accept.size>1024*1024*10){
-            message.warn(`图片文件不可超过10Mb！`);
+            message.warn(`图片文件不可超过10Mb！`,2.5);
             return Promise.reject();
         }
-        if(accept === "video" && accept.size>1024*1024*500){
-            message.warn(`视频文件不可超过500Mb！`);
+        if(accept === "video" && accept.size>1024*1024*100){
+            message.warn(`视频文件不可超过100Mb！`,2.5);
             return Promise.reject();
         }
         return Promise.resolve();
@@ -129,37 +132,6 @@ export default class extends React.Component{
         this.setState({fileList:newFileList});
         this.props.onChange(JSON.stringify(newFileList));
     }
-}
-const customRequest = function({
-   action,
-   data,
-   file,
-   onError,
-   onProgress,
-   onSuccess,
-}) {
-    const formData = new FormData();
-    formData.append("file",file);
-    if (data) {
-        Object.keys(data).forEach(key => {
-            formData.append(key, data[key]);
-        });
-    }
-    $http({
-        url:action,
-        method:"post",
-        data:formData,
-        timeout:1000*60*5,
-        onUploadProgress: ({ total, loaded }) => {
-            onProgress({ percent: Math.round(loaded / total * 100).toFixed(2) }, file);
-        },
-    }).then(([res])=>{
-        const url = res.url.indexOf("http://") === 0 ? res.url : resourceHost+res.url;
-        return onSuccess({
-            ...res,
-            url
-        })
-    }).catch(onError);
 }
 const getImageInfo = function(file){
     return new Promise((resolve, reject)=>{

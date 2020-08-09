@@ -18,7 +18,8 @@ const API = {
 		getArticleDetail:"/content/detail",//获取文章详情
 		createArticle:"/content/add",//创建文章
 		updateArticle:"/content/update",//更新文章
-		getRelationSubject:"/content/topics",//获取当前文章已关联的专题信息
+		deleteArticle:"content/delete",//删除文章
+		getRelationSubject:"/classify/listTopicByContentId",//获取当前文章已关联的专题信息
 	},
 	resource:{
 		upload:"/img/upload",
@@ -29,7 +30,9 @@ const API = {
 		updateSubject:"/topic/updateTopic",
 		enableSubject:"/topic/onlineTopic",
 		disableSubject:"/topic/offlineTopic",
-		deleteSubject:"/topic/delTopic"
+		deleteSubject:"/topic/delTopic",
+		getInsertArticles:"/classify/listContentByTopicId",
+		insertArticles:"/topic/importArticles"
 	}
 };
 

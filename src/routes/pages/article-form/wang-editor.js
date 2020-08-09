@@ -1,9 +1,10 @@
 import React from "react";
 import WEditor from "wangeditor";
 import {PictureOutlined} from "@ant-design/icons";
-import {Button} from "antd";
+import {Button,message} from "antd";
 import style from "./wang-editor.module.css";
-import Upload from "@components/upload";
+import uploadRequest from "@components/e-upload/request";
+import rndm from "rndm";
 
 export default class extends React.Component{
     constructor(props) {
@@ -16,7 +17,7 @@ export default class extends React.Component{
         return(
             <div>
                 <div id={this.toolbarId} className={style["wang-editor-toolbar"]}></div>
-                <SelfToolbar/>
+                <SelfToolbar run={this.runCMD}/>
                 <div id={this.containerId} className={style["wang-editor-content"]}></div>
             </div>
         )
@@ -61,41 +62,75 @@ export default class extends React.Component{
         this.instance.customConfig.zIndex = 100;
         this.instance.create();
     }
-    click=()=>{
-        this.instance.cmd.do('insertHTML', '<p>xxx</p>')
+    runCMD=(name,value)=>{
+        this.instance.cmd.do(name, value)
     }
 }
 
 class SelfToolbar extends React.Component{
     constructor(props) {
         super(props);
-        this.imageInstance = React.createRef();
-        this.videoInstance = React.createRef();
+        this.imageInputId = "image_"+rndm(10);
+        this.videoInputId = "image_"+rndm(10);
     }
     render(){
         return(
             <div>
-                <Button onClick={()=>this.uploadFile(this.imageInstance)} className={style.selfBtn} size={"small"} icon={<PictureOutlined />}>本地图片</Button>
-                <Upload ref={this.imageInstance} callback={this.imageCallback} visible={false} accept={"image/*"}/>
-                <Button onClick={()=>this.chooseMaterial("image")} className={style.selfBtn} size={"small"} icon={<PictureOutlined />}>图片库</Button>
+                <Button onClick={()=>this.uploadImageFile()} className={style.selfBtn} size={"small"} icon={<PictureOutlined />}>本地图片</Button>
+                <input style={{display:"none"}} id={this.imageInputId} type={"file"} accept={"image/*"}/>
 
-                <Button onClick={()=>this.uploadFile(this.videoInstance)} className={style.selfBtn} size={"small"} icon={<PictureOutlined />}>本地视频</Button>
-                <Upload ref={this.videoInstance} callback={this.videoCallback} visible={false} accept={"video/*"}/>
-                <Button onClick={()=>this.chooseMaterial("video")} className={style.selfBtn} size={"small"} icon={<PictureOutlined />}>视频库</Button>
+                <Button onClick={()=>this.uploadVideoFile()} className={style.selfBtn} size={"small"} icon={<PictureOutlined />}>本地视频</Button>
+                <input style={{display:"none"}} id={this.videoInputId} type={"file"} accept={"video/*"}/>
 
             </div>
         )
     }
-    uploadFile=(instance)=>{
-        instance.current.chooseFile();
-    };
-    imageCallback=(files)=>{
-        console.log(files);
-    };
-    videoCallback=(files)=>{
-        console.log(files);
-    };
-    chooseMaterial=(type)=>{
-
-    };
+    uploadImageFile=()=>{
+        const {run} = this.props;
+        const inputDOM = document.getElementById(this.imageInputId);
+        inputDOM.click();
+        inputDOM.onchange=()=>{
+            const file = inputDOM.files[0];
+            if(file.type.substring(0,5) !== "image"){
+                message.warn("请选择图片文件！",2.5);
+                return false;
+            }
+            uploadRequest({
+                file,
+                onSuccess:({url})=>{
+                    console.log(url);
+                    run('insertHTML', `<img src=${url} />`)
+                },
+                onError:(error)=>{
+                    message.error(error,2.5);
+                }
+            })
+        }
+    }
+    uploadVideoFile=()=>{
+        const {run} = this.props;
+        const inputDOM = document.getElementById(this.videoInputId);
+        inputDOM.click();
+        inputDOM.onchange=()=>{
+            const file = inputDOM.files[0];
+            if(file.type.substring(0,5) !== "video"){
+                message.warn("请选择视频文件（建议mp4格式）！",2.5);
+                return false;
+            }
+            if(file.size>1024*1024*100){
+                message.warn(`视频文件不可超过100Mb！`,2.5);
+                return false;
+            }
+            uploadRequest({
+                file,
+                onSuccess:({url})=>{
+                    console.log(url);
+                    run('insertHTML', `<video controls autoplay><source src="${url}" type="${file.type}"/></video>`)
+                },
+                onError:(error)=>{
+                    message.error(error,2.5);
+                }
+            })
+        }
+    }
 }

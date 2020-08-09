@@ -1,5 +1,5 @@
 import React from "react";
-import {Row,Col,Form,Input,Checkbox,Button,message} from "antd";
+import {Row,Col,Form,Input,Button,message} from "antd";
 import {UserOutlined,LockOutlined} from "@ant-design/icons";
 import style from "./index.module.css";
 import {login} from "../../data/request";
@@ -20,9 +20,6 @@ export default class extends React.Component{
 const layout = {
 	labelCol:{span:4},
 	wrapperCol:{span:18},
-};
-const tailLayout = {
-	wrapperCol:{offset:4,span:18},
 };
 class SubmitForm extends React.Component{
 	render(){

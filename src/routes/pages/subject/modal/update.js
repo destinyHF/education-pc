@@ -20,7 +20,7 @@ export default class extends React.Component{
         return(
             <Form ref={formRef} initialValues={initialValues} {...layout}>
                 <Form.Item
-                    label={"名称"}
+                    label={"专题名称"}
                     name={"name"}
                     rules={[
                         {required:true,message:"必填！"}

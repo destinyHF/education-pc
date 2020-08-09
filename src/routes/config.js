@@ -3,8 +3,8 @@ import {PicLeftOutlined,UnorderedListOutlined,UsergroupAddOutlined} from "@ant-d
 import Published from "./pages/published";
 import Drafts from "./pages/drafts";
 import ArticleForm from "./pages/article-form";
-import ImgMaterial from "./pages/img-material";
-import VideoMaterial from "./pages/video-material";
+// import ImgMaterial from "./pages/img-material";
+// import VideoMaterial from "./pages/video-material";
 import UserManage from "./pages/user-manage";
 import SubjectManage from "./pages/subject";
 /*

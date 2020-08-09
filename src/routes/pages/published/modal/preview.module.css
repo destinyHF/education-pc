@@ -1,0 +1,47 @@
+.wrapper{
+	width: 375px;
+	height: 731px;
+	margin: auto;
+}
+.header{
+	height: 64px;
+	border-radius: 4px 4px 0 0;
+	background: rgba(55,55,55,.98) url("../../../../static/mobile-info.png") no-repeat center 12px;
+	background-size: 90%;
+}
+.content{
+	height: 667px;
+	overflow: auto;
+	background: #fafafa;
+	padding: 10px 15px;
+}
+.url{
+	width: 350px;
+	height: 28px;
+	line-height: 28px;
+	color: #fff;
+	background-color: #a2a2a2;
+	margin: 0 auto;
+	border-radius: 4px;
+	white-space: nowrap;
+	position: relative;
+	top: 30px;
+}
+.title{
+	font-size: 18px;
+	font-weight: bold;
+}
+.info{
+	display: flex;
+	justify-content: space-between;
+}
+.text{
+	font-size: 14px;
+	line-height: 1.5;
+	text-align: justify;
+	padding-top: 15px;
+	color: rgba(0, 0, 0, 0.65);
+}
+.text img{
+	width: 100%;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import {Tag,Button} from "antd";
+import {Tag} from "antd";
 
 export default class extends React.Component{
 	render(){

@@ -59,3 +59,23 @@ export function disableSubject(data={}){
         data
     })
 }
+/*
+* 获取当前专题下的文章
+* */
+export function getInsertArticles(data={}){
+    return $http({
+        url:API.subject.getInsertArticles,
+        method:"get",
+        data
+    })
+}
+/*
+* 导入文章
+* */
+export function insertArticles(data={}){
+    return $http({
+        url:API.subject.insertArticles,
+        method:"post",
+        data
+    })
+}

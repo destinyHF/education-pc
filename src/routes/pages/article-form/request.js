@@ -4,7 +4,7 @@ import $http from "@data/$http";
 /*新建文章*/
 export function createArticle(data={}){
 	return $http({
-		url:API.common.createArticle,
+		url:API.article.createArticle,
 		method:"post",
 		data,
 	})

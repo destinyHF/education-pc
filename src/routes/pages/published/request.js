@@ -17,3 +17,11 @@ export function getArticleDetail(data={}){
 		data,
 	})
 }
+/*删除文章*/
+export function deleteArticle(params={}){
+	return $http({
+		url:API.article.deleteArticle,
+		method:"delete",
+		params,
+	})
+}

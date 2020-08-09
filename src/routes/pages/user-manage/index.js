@@ -3,7 +3,7 @@
 * */
 import React from "react";
 import {Tooltip,message,Modal} from "antd";
-import {EditOutlined,DeleteOutlined,LockOutlined,QuestionCircleOutlined,UnlockOutlined} from "@ant-design/icons";
+import {EditOutlined,DeleteOutlined,LockOutlined,ExclamationCircleOutlined,UnlockOutlined} from "@ant-design/icons";
 import ETable from "@components/e-table";
 import {getUserList,createUser,switchUserStatus,updateUser,deleteUser} from "./request";
 import moment from "moment";
@@ -133,7 +133,7 @@ export default class extends React.Component{
     deleteUser=({userId},callback)=>{
         Modal.confirm({
             title:"删除",
-            icon:<QuestionCircleOutlined />,
+            icon:<DeleteOutlined />,
             content:"确认执行删除操作？",
             onOk:(close)=>{
                 deleteUser({userId}).then(()=>{
@@ -147,11 +147,20 @@ export default class extends React.Component{
         })
     };
     switchStatus=(userId,state,callback)=>{
-        switchUserStatus({userId,state}).then(()=>{
-            message.success("操作成功！",1.5);
-            callback();
-        }).catch(error=>{
-            message.error(error,2.5);
+        const txt = state?"启用":"禁用";
+        Modal.confirm({
+            title:txt,
+            icon:<ExclamationCircleOutlined />,
+            content:`确认执行${txt}操作？`,
+            onOk:(close)=>{
+                switchUserStatus({userId,state}).then(()=>{
+                    message.success("操作成功！",1.5);
+                    callback();
+                    close();
+                }).catch(error=>{
+                    message.error(error,2.5);
+                })
+            }
         })
     }
 }

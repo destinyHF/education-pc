@@ -84,18 +84,12 @@ export default class extends React.Component{
 	}
 	showUserInfo=()=>{
 		const formRef = React.createRef();
-		Modal.confirm({
+		Modal.info({
 			icon:<IdcardOutlined />,
 			title:"个人信息",
 			width:500,
 			content:<UserInfo formRef={formRef}/>,
-			okText:"保存",
-			onOk:(close)=>{
-				formRef.current.validateFields().then(values=>{
-					// 执行ajax更新用户信息
-					message.success("修改成功！",1.5,close);
-				}).catch(error=>console.log(error));
-			}
+			okText:"关闭",
 		})
 	}
 }

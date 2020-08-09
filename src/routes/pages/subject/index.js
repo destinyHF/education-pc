@@ -4,9 +4,11 @@ import ETable from "@components/e-table";
 import StatusText from "@components/status-text";
 import Thumbnail from "@components/thumbnail";
 import moment from "moment";
-import {getSubjectList,addSubject,updateSubject,deleteSubject,enableSubject,disableSubject} from "./request";
+import {getSubjectList,addSubject,updateSubject,deleteSubject,enableSubject,disableSubject,getInsertArticles,insertArticles} from "./request";
 import ModalForm from "./modal/update";
 import {DeleteOutlined, EditOutlined, LockOutlined, QuestionCircleOutlined, UnlockOutlined,CopyOutlined} from "@ant-design/icons";
+import ArticleTable from "./modal/article-table";
+import InsertedArticle from "./modal/inserted-article";
 
 
 const conditions = [
@@ -33,7 +35,7 @@ export default class extends React.Component{
                 handleCallback={this.handleCallback}
                 scrollX={1200}
                 tableColumn={[
-                    {title:"名称",width:"150px",key:"name"},
+                    {title:"专题名称",width:"150px",key:"name"},
                     {title:"封面图",width:"150px",key:"url",component:({data})=>
                         <Thumbnail src={JSON.parse(data.url || "[]")[0]}/>
                     },
@@ -44,6 +46,7 @@ export default class extends React.Component{
                         ]}/>
                     },
                     {title:"描述",width:"200px",key:"description"},
+                    {title:"已导入文章",width:"80px",key:"contentNum",component:({data})=><span onClick={()=>this.getInsertArticles(data.id)} className={"a-link"}>{data.contentNum}</span>},
                     {title:"创建人",width:"100px",key:"createBy"},
                     {title:"创建时间",width:"150px",key:"createTime",component:({data})=>moment(data.createTime).format("YYYY-MM-DD HH:mm:ss")},
                     {title:"更新人",width:"100px",key:"updateBy"},
@@ -124,7 +127,32 @@ export default class extends React.Component{
         })
     }
     importArticle=(data,callback)=>{
+        getInsertArticles({topicId:data.id}).then(response=>{
+            const selectedRowKeys =  response.map(item=>item.id);
+            const tableRef = React.createRef();
+            Modal.confirm({
+                title:"选择文章",
+                width:1000,
+                content:<ArticleTable selectedRowKeys={selectedRowKeys} tableRef={tableRef}/>,
+                onOk:(close)=>{
+                    const {selectedRowKeys} = tableRef.current.state;
+                    if(!selectedRowKeys.length){
+                        message.error("请选择要导入的文章！",2.5);
+                        return false;
+                    }
+                    insertArticles({topicId:data.id,articleIds:selectedRowKeys}).then(()=>{
+                        message.success("操作成功！",1.5);
+                        callback();
+                        close();
+                    }).catch(error=>{
+                        message.error(error,2.5);
+                    });
+                }
+            })
 
+        }).catch(error=>{
+            message.error(error,2.5);
+        });
     }
     deleteSubject=(data,callback)=>{
         if(data.status === "ONLINE"){
@@ -133,8 +161,8 @@ export default class extends React.Component{
         }
         Modal.confirm({
             title:"删除",
-            icon:<QuestionCircleOutlined />,
-            content:"确认执行删除操作？",
+            icon:<DeleteOutlined />,
+            content:"该操作不可逆，确认删除该专题？",
             onOk:(close)=>{
                 deleteSubject({id:data.id}).then(()=>{
                     message.success("操作成功！",1.5);
@@ -168,6 +196,18 @@ export default class extends React.Component{
                     message.error(error,2.5);
                 })
             }
+        })
+    }
+    getInsertArticles=(topicId)=>{
+        getInsertArticles({topicId}).then(response=>{
+            Modal.info({
+                title:"已导入文章",
+                width:1000,
+                content:<InsertedArticle data={response}/>,
+                okText:"关闭"
+            })
+        }).catch(error=>{
+            message.error(error,2.5);
         })
     }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import {Radio,Row,Col,Tooltip} from "antd";
+import {Radio,Row,Col} from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
 import EUpload from "@components/e-upload";
 
@@ -35,7 +35,7 @@ export default class extends React.Component{
         )
     }
     parsePropsValue=()=>{
-        const {type,urls=[]} = JSON.parse(this.props.value || `{"type":"multiplePic","urls":[]}`);
+        const {type,urls=[]} = JSON.parse(this.props.value || `{"type":"","urls":[]}`);
         return{
             type,
             urls:JSON.stringify(urls)
