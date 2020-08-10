@@ -41,7 +41,7 @@ class ETable extends React.Component{
 	}
 	render(){
 		const {conditions,handleBtn,rowKey,handleCallback,scrollX,tableColumn,selectable,selectType,title} = this.props;
-		const {searchDataOrigin,dataSource,page,pageSize,totalSize,totalPage,selectedRowKeys,selectedRows,recordRows} = this.state;
+		const {searchDataOrigin,dataSource,currentPage,pageSize,totalSize,totalPage,selectedRowKeys,selectedRows,recordRows} = this.state;
 		return(
 			<Card title={title}  bodyStyle={{padding:"10px 24px 0"}}>
 				<div className={"table-choose"}>
@@ -66,7 +66,7 @@ class ETable extends React.Component{
 						recordCallback={value=>this.setState({recordRows:value})}
 						pagination={{
 							defaultCurrent:1,
-							current:page,
+							current:currentPage,
 							pageSize,
 							total:totalSize,
 							selectedRowKeys,
@@ -77,8 +77,8 @@ class ETable extends React.Component{
 							},
 							showSizeChanger:true,
 							pageSizeOptions:["10","20","50"],
-							onChange:(page,pageSize)=>this.getResourceData({page,pageSize},false),
-							onShowSizeChange:(page,pageSize)=>this.getResourceData({page,pageSize},true),
+							onChange:(currentPage,pageSize)=>this.getResourceData({currentPage,pageSize},false),
+							onShowSizeChange:(currentPage,pageSize)=>this.getResourceData({currentPage,pageSize},true),
 							size:"default"
 						}}
 						tableColumn={tableColumn}
@@ -189,7 +189,7 @@ class ETable extends React.Component{
 				totalPage,
 				dataSource,
 				originDataSource,
-				page:currentPage,
+				currentPage,
 				pageSize
 			};
 			this.setState({

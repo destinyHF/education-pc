@@ -33,7 +33,7 @@ export default class extends React.Component{
                 conditions={conditions}
                 handleBtn={handleBtn}
                 handleCallback={this.handleCallback}
-                scrollX={1200}
+                scrollX={1400}
                 tableColumn={[
                     {title:"专题名称",width:"150px",key:"name"},
                     {title:"封面图",width:"150px",key:"url",component:({data})=>
@@ -46,12 +46,12 @@ export default class extends React.Component{
                         ]}/>
                     },
                     {title:"描述",width:"200px",key:"description"},
-                    {title:"已导入文章",width:"80px",key:"contentNum",component:({data})=><span onClick={()=>this.getInsertArticles(data.id)} className={"a-link"}>{data.contentNum}</span>},
+                    {title:"已导入文章",width:"100px",key:"contentNum",component:({data})=><span onClick={()=>this.getInsertArticles(data.id)} className={"a-link"}>{data.contentNum}</span>},
                     {title:"创建人",width:"100px",key:"createBy"},
                     {title:"创建时间",width:"150px",key:"createTime",component:({data})=>moment(data.createTime).format("YYYY-MM-DD HH:mm:ss")},
                     {title:"更新人",width:"100px",key:"updateBy"},
                     {title:"更新时间",width:"150px",key:"updateTime",component:({data})=>moment(data.updateTime).format("YYYY-MM-DD HH:mm:ss")},
-                    {title:"操作",fixed:"right",width:"100px",key:"handle",component:({data,getList})=>
+                    {title:"操作",fixed:"right",width:"130px",key:"handle",component:({data,getList})=>
                         <div>
                             <Tooltip title={"编辑"}>
                                 <EditOutlined onClick={()=>this.editSubject(data,getList)} className={"table-icon"} />

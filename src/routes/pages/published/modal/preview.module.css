@@ -42,6 +42,6 @@
 	padding-top: 15px;
 	color: rgba(0, 0, 0, 0.65);
 }
-.text img{
+.text img,.text video{
 	width: 100%;
 }
