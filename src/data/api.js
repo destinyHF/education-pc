@@ -20,6 +20,8 @@ const API = {
 		updateArticle:"/content/update",//更新文章
 		deleteArticle:"content/delete",//删除文章
 		getRelationSubject:"/classify/listTopicByContentId",//获取当前文章已关联的专题信息
+		getBannerList:"/banner/list",
+		updateBanner:"/banner/update"
 	},
 	resource:{
 		upload:"/img/upload",

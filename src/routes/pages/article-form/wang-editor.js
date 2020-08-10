@@ -29,7 +29,6 @@ export default class extends React.Component{
         return this.props.value !== nextProps.value;
     }
     componentDidUpdate(){
-        console.log("update");
         this.instance.txt.html(this.props.value);
     }
     initial=()=>{
@@ -98,7 +97,6 @@ class SelfToolbar extends React.Component{
             uploadRequest({
                 file,
                 onSuccess:({url})=>{
-                    console.log(url);
                     run('insertHTML', `<img src=${url} />`)
                 },
                 onError:(error)=>{
@@ -124,7 +122,6 @@ class SelfToolbar extends React.Component{
             uploadRequest({
                 file,
                 onSuccess:({url})=>{
-                    console.log(url);
                     run('insertHTML', `<video controls autoplay><source src="${url}" type="${file.type}"/></video>`)
                 },
                 onError:(error)=>{

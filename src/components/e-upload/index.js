@@ -8,10 +8,10 @@ import customRequest from "./request";
 
 export default class extends React.Component{
     static defaultProps = {
-        action:qiniuUploadHost,
-        data:{token:qiniuToken},
-        // action:API.resource.upload,
-        // data:{},
+        // action:qiniuUploadHost,
+        // data:{token:qiniuToken},
+        action:API.resource.upload,
+        data:{},
         listType:"text",
         accept:"image",
         onSuccess:()=>{},

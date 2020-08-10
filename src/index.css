@@ -27,6 +27,10 @@ code {
 .ant-modal-confirm-content{
   margin-left: 0 !important;
 }
+.ant-card-body{
+  max-height: 65vh;
+  overflow: auto;
+}
 /*通用文本样式*/
 .text-primary{
   color: #1890ff;

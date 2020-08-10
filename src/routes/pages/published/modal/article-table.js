@@ -3,28 +3,25 @@ import StatusText from "@components/status-text";
 import moment from "moment";
 import React from "react";
 import {getArticleList} from "../../published/request";
+import CoverModel from "./cover-model";
 
 const conditions = [
 	{label:"文章标题",type:"input",key:"name"},
-	{label:"文章状态",type:"select",key:"draft",options:[
-			{label:"全部",value:""},
-			{label:"已发布",value:false},
-			{label:"未发布",value:true},
-		]
-	}
 ];
 
 export default class extends React.Component{
 	render(){
-		const {tableRef,selectedRowKeys} = this.props;
+		const {tableRef,selectedRows} = this.props;
 		return(
 			<ETable
 				ref={tableRef}
-				selectedRowKeys={selectedRowKeys}
+				selectedRowKeys={selectedRows.map(item=>item.id)}
+				selectedRows={selectedRows}
 				recordRows={true}
 				conditions={conditions}
 				tableColumn={[
 					{title:"文章标题",width:"100px",key:"title"},
+					{title:"封面模式",width:"80px",key:"url",component:CoverModel},
 					{title:"状态",width:"80px",key:"draft",component:({data})=>
 							<StatusText value={data.draft} dataSource={[
 								{code:false,color:"success",text:"已发布"},
@@ -34,7 +31,7 @@ export default class extends React.Component{
 					{title:"更新人",width:"80px",key:"updateBy"},
 					{title:"更新时间",width:"150px",key:"updateTime",component:({data})=>moment(data.updateTime).format("YYYY-MM-DD HH:mm:ss")},
 				]}
-				dataSource={getArticleList}
+				dataSource={data=>getArticleList({...data,draft:false})}
 			/>
 		)
 	}

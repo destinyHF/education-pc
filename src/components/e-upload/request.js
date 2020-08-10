@@ -2,10 +2,10 @@ import {API,$http} from "@data/api";
 import {qiniuToken,qiniuUploadHost,resourceHost} from "../../config";
 
 export default function ({
-   action=qiniuUploadHost,
-   data={token:qiniuToken},
-   // action=API.resource.upload,
-   // data={},
+   // action=qiniuUploadHost,
+   // data={token:qiniuToken},
+   action=API.resource.upload,
+   data={},
    file=null,
    onError=()=>{},
    onProgress=()=>{},

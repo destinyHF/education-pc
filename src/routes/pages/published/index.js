@@ -3,17 +3,19 @@ import {Tooltip,Modal,message} from "antd";
 import {EditOutlined, UndoOutlined, ExclamationCircleOutlined, BookOutlined} from "@ant-design/icons";
 import ETable from "@components/e-table";
 import {parseObject} from "@utility/common";
-import {getArticleList,getArticleDetail} from "./request";
+import {getArticleList,getArticleDetail,updateBanner} from "./request";
 import {updateArticle} from "../article-form/request";
 import moment from "moment";
 import CoverModel from "./modal/cover-model";
 import PreviewModal from "./modal/preview";
+import BannerManage from "./modal/banner-manage";
 
 const conditions = [{
 	label:"标题",type:"input",key:"title"
 }];
 const handleBtn = [
-	{key:"create",name:"新建",type:"primary",relation:"none"}
+	{key:"create",name:"新建",type:"primary",relation:"none"},
+	{key:"configBanner",name:"Banner管理",type:"default",relation:"none"}
 ];
 
 export default class extends React.Component{
@@ -54,12 +56,39 @@ export default class extends React.Component{
 		switch (key) {
 			case "create":
 				this.createArticle();break;
+			case "configBanner":
+				this.configBanner();break;
 			default:
 				return;
 		}
 	};
 	createArticle=()=>{
 		this.props.history.push("createArticle");
+	};
+	configBanner=()=>{
+		const ref = React.createRef();
+		Modal.confirm({
+			title:"Banner管理",
+			width:1000,
+			content:<BannerManage ref={ref}/>,
+			onOk:(close)=>{
+				const {dataSource} = ref.current.state;
+				if(dataSource.length<2 || dataSource.length>5){
+					message.warn("Banner位文章个数请保留2~5篇！",2.5);
+					return false;
+				}
+				updateBanner({
+					banners:dataSource.map(item=>{
+						return {contentId:item.id}
+					})
+				}).then(()=>{
+					message.success("操作成功！",1.5);
+					close();
+				}).catch(error=>{
+					message.error(error,2.5);
+				})
+			}
+		})
 	};
 	editArticle=(target)=>{
 		const params = {

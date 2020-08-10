@@ -14,6 +14,7 @@ class ETable extends React.Component{
 		handleBtn:[], //操作按钮集合
 		handleCallback:()=>{},
 		selectedRowKeys:[],//被选中的keys
+		selectedRows:[],
 		recordRows:false,//是否启用翻页保留
 		dataSource:[],//表格数据源
 		rowKey:"id",//唯一标识符
@@ -28,7 +29,7 @@ class ETable extends React.Component{
 			searchData:getDefaultSearchData(props.conditions,true),
 			searchDataOrigin:getDefaultSearchData(props.conditions),
 			selectedRowKeys:props.selectedRowKeys,
-			selectedRows:[],
+			selectedRows:props.selectedRows,
 			dataSource:[],
 			dynamic,
 			originDataSource:dynamic?[]:props.dataSource,

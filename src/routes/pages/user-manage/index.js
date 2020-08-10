@@ -47,24 +47,30 @@ export default class extends React.Component{
                     {title:"创建时间",width:"200px",key:"createTime",component:({data})=>moment(data.createTime).format("YYYY-MM-DD HH:mm:ss")},
                     {title:"操作",width:"100px",key:"handle",component:({data,getList})=>
                         <div>
-                            <Tooltip title={"编辑"}>
-                                <EditOutlined onClick={()=>this.editUser(data,getList)} className={"table-icon"} />
-                            </Tooltip>
-                            <Tooltip title={"删除"}>
-                                <DeleteOutlined onClick={()=>this.deleteUser(data,getList)} className={"table-icon"}/>
-                            </Tooltip>
                             {
-                                data.state === true &&
-                                <Tooltip title={"禁用"}>
-                                    <LockOutlined onClick={()=>this.switchStatus(data.userId,!data.state,getList)} className={"table-icon"}/>
-                                </Tooltip>
+                                data.userName !== "admin" &&
+                                <>
+                                  <Tooltip title={"编辑"}>
+                                      <EditOutlined onClick={()=>this.editUser(data,getList)} className={"table-icon"} />
+                                  </Tooltip>
+                                  <Tooltip title={"删除"}>
+                                      <DeleteOutlined onClick={()=>this.deleteUser(data,getList)} className={"table-icon"}/>
+                                  </Tooltip>
+                                  {
+                                      data.state === true &&
+                                      <Tooltip title={"禁用"}>
+                                          <LockOutlined onClick={()=>this.switchStatus(data.userId,!data.state,getList)} className={"table-icon"}/>
+                                      </Tooltip>
+                                  }
+                                  {
+                                      data.state === false &&
+                                      <Tooltip title={"启用"}>
+                                          <UnlockOutlined onClick={()=>this.switchStatus(data.userId,!data.state,getList)} className={"table-icon"}/>
+                                      </Tooltip>
+                                  }
+                                </>
                             }
-                            {
-                                data.state === false &&
-                                <Tooltip title={"启用"}>
-                                    <UnlockOutlined onClick={()=>this.switchStatus(data.userId,!data.state,getList)} className={"table-icon"}/>
-                                </Tooltip>
-                            }
+
                         </div>
                     }
                 ]}

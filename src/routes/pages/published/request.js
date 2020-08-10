@@ -25,3 +25,19 @@ export function deleteArticle(params={}){
 		params,
 	})
 }
+/*获取banner列表*/
+export function getBannerList(data={}){
+	return $http({
+		url:API.article.getBannerList,
+		method:"get",
+		data,
+	})
+}
+/*更新banner列表*/
+export function updateBanner(data={}){
+	return $http({
+		url:API.article.updateBanner,
+		method:"post",
+		data,
+	})
+}
